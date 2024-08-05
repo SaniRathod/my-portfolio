@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio Website - Easy Tutorials</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <nav>
+            <!-- <img src="images/logo.png" class="logo"> -->
+             <h1 class="h1">Sani Rathod</h1>
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <i class="fas fa-times" onclick="closemenu()"></i>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+            <p>Web Developer & Java Developer</p>
+            <h1>Hi, I'm <span>Sani</span><br>Rathod From India</h1>
+        </div> 
+    </div>
+</div>
+<!-- -----------about---------- -->
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/bgImg.jpg">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">About Me</h1>
+                <p>I am a passionate and creative frontend developer with a keen eye for design and a love for crafting user-centric web experiences. With a solid foundation in HTML, CSS, and JavaScript, I specialize in bringing static designs to life with interactive and responsive elements. My journey in web development began with a curiosity-driven exploration of coding languages, and I've since honed my skills through hands-on projects and Continious learning</p>
+
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                    <p class="tab-links" onclick="opentab('education')">Education</p>
+                </div>
+                <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>UI/UX</span><br>Designing Web/App interfaces</li>
+                        <li><span>Web Development</span><br>Web app Development</li>
+                        <li><span>Java Development</span><br>Building Java Based Application</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="experience">
+                    <ul>
+                        <li><span>Nov 2023 - Feb 2024</span><br>Web Development Training and Internship at Codersfuel Infotech</li>
+                        <li><span>Apr 2023 - Jun 2023</span><br>Java Development Training at PHN Technology Pvt ltd.</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>2020 - 2024</span><br>Completed BE in Computer Engineering at SGBAU with 71.33%</li>
+                        <li><span>2019</span><br>Completed HSC With 71.08%.</li>
+                        <li><span>2014</span><br>Completed SSC With 80.00%.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ---------services---------------- -->
+<div id="services">
+    <div class="container">
+        <h1 class="sub-title">My Skills</h1>
+        <div class="services-list">
+            <div>
+                <i class="fas fa-code"></i>
+                <h2>Java</h2>
+                <p>Java is a widely-used, high-level programming language known for its simplicity, portability, and reliability. Developed by Sun Microsystems in the mid-1990s, Java enables developers to write code once and run it anywhere (thanks to its "write once, run anywhere" philosophy). It is an object-oriented language, which means it focuses on data and the methods that operate on that data. Java is used in a variety of applications, including web development, mobile apps (especially Android apps), and large-scale enterprise systems. Its extensive libraries, frameworks, and strong community support make it a popular choice for developers around the world.</p>
+                <a href="#">Learn more</a>
+            </div>
+            <div>
+                <i class="fas fa-crop-alt"></i>
+                <h2>HTML5/CSS3</h2>
+                <p>HTML is the standard language used to create and structure content on the web. It defines the elements of a web page, such as headings, paragraphs, links, images, and other content. HTML uses tags to organize and format this content, forming the basic structure of a web page.
+
+                    CSS is used to style and layout HTML elements. It controls how the content appears, including colors, fonts, spacing, and positioning. CSS allows developers to create visually appealing and responsive designs, making it possible to adjust the layout and style of a web page across different devices and screen sizes.</p>
+                <a href="#">Learn more</a>
+            </div>
+            <div>
+                <i class="fab fa-app-store"></i>
+                <h2>JavaScript</h2>
+                <p>JavaScript is a crucial programming language for adding interactivity and dynamic features to websites. It allows developers to create responsive user experiences by enabling real-time updates to web content, handling user interactions, and controlling multimedia elements. JavaScript works seamlessly with HTML and CSS to build and enhance web applications, providing functionalities such as form validation, animation, and interactive elements. With its extensive ecosystem of libraries and frameworks, like React and Angular, JavaScript simplifies complex tasks and accelerates development, making it an essential tool for modern web development.</p>
+                <a href="#">Learn more</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------portfolio------------ -->
+<div id="portfolio">
+    <div class="container">
+        <h1 class="sub-title">My Work</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="images/work-1.png">
+                <div class="layer">
+                    <h3>Portfolio Website</h3>
+                    <p>Explore my project portfolio showcasing a projects. From concept to execution, each project highlights my skills, creativity, and dedication to excellence. Dive into case studies, visual showcases, and detailed descriptions. Let's connect and discuss how we can collaborate on future endeavors!.</p>
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work-2.png">
+                <div class="layer">
+                    <h3>Restarunt Reservation System</h3>
+                    <p>Introducing my restaurant reservation system project. This application allows users to easily book tables, view available time slots, and receive confirmation instantly. It includes features like real-time availability, user-friendly interface, and admin management tools for restaurants. Designed to streamline the booking process, enhance customer experience, and improve operational efficiency.</p>
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work-3.png">
+                <div class="layer">
+                    <h3>Text Summarization</h3>
+                    <p>My text summarization app project, which uses advanced algorithms to condense long texts into concise summaries. It simplifies information digestion by extracting key points, ensuring users quickly grasp the main ideas. The app features an intuitive interface and supports multiple languages, making it a valuable tool for students, professionals, and content creators.</p>
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="btn">See more</a>
+    </div>
+</div>
+<!-- ----------contact------------- -->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fas fa-paper-plane"></i> sanirathod8975@gmail.com</p>
+                <p><i class="fas fa-phone-square-alt"></i> 8975223625</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com/"><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-twitter-square"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                    <a href=""><i class="fab fa-linkedin"></i></a>
+                </div>
+                <a href="images/resume.pdf" download class="btn btn2">Download CV</a>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="b39c2765-aaee-4cfa-9c57-929b991a2124">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>Copyright © Sani. Made wtih <i class="fas fa-heart"></i> EasyCode</a></p>
+    </div>
+</div>
+
+
+
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+
+</script>
+
+<script>
+
+    var sidemeu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemeu.style.right = "0";
+    }
+    function closemenu(){
+        sidemeu.style.right = "-200px";
+    }
+
+</script>
+<script>
+    const scriptURL = '< add you own link here >' // add your own app script link here
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message sent successfully"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },5000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+</body>
+</html>
