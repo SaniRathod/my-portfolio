@@ -6,24 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Portfolio Website - Easy Tutorials</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Animate CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="header">
     <div class="container">
+        <div class="menu_icon_box" onclick="openmenu()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <div class="box">
         <nav>
             <!-- <img src="images/logo.png" class="logo"> -->
              <h1 class="h1">Sani Rathod</h1>
             <ul id="sidemenu">
                 <li><a href="#header">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#services">Skills</a></li>
+                <li><a href="#portfolio">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <i class="fas fa-times" onclick="closemenu()"></i>
+                <i class="fas fa-times" onclick="closemenu()">Close</i>
             </ul>
+
             <i class="fas fa-bars" onclick="openmenu()"></i>
         </nav>
+        </div>
         <div class="header-text">
             <p>Web Developer & Java Developer</p>
             <h1>Hi, I'm <span>Sani</span><br>Rathod From India</h1>
@@ -63,7 +76,7 @@
                     <ul>
                         <li><span>2020 - 2024</span><br>Completed BE in Computer Engineering at SGBAU with 71.33%</li>
                         <li><span>2019</span><br>Completed HSC With 71.08%.</li>
-                        <li><span>2014</span><br>Completed SSC With 80.00%.</li>
+                        <li><span>2017</span><br>Completed SSC With 80.00%.</li>
                     </ul>
                 </div>
             </div>
@@ -161,7 +174,7 @@
     </div>
 
     <div class="copyright">
-        <p>Copyright © Sani. Made wtih <i class="fas fa-heart"></i> EasyCode</a></p>
+        <p>Copyright © Sani. Developed By <i class="fas fa-heart"></i> Sani</a></p>
     </div>
 </div>
 
@@ -197,6 +210,11 @@
     }
 
 </script>
+<script
+nomodule
+src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+></script>
+    
 <script>
     const scriptURL = '< add you own link here >' // add your own app script link here
     const form = document.forms['submit-to-google-sheet']
