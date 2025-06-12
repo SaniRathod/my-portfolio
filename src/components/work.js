@@ -27,7 +27,7 @@ export default function Work() {
         "Worked on a project involving the development and implementation of a robust PayPal integration system within an e-commerce application. This system enables users to securely process payments directly through their PayPal accounts or linked credit/debit cards, offering a familiar and trusted checkout experience. It handles transaction initiation, payment confirmation, and error management, ensuring a seamless and reliable payment gateway for customers.",
       duration: "2024",
       icon: <Globe className="w-8 h-8 text-blue-600" />,
-      tech: ["React.js", "CSS3", "JavaScript"],
+      tech: ["Java", "Spring Boot", "MYSQL", "Auth"],
     },
     {
       title: "PortFolio",

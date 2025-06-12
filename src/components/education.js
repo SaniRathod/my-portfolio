@@ -30,7 +30,7 @@ export default function Education() {
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {education.map((edu, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
-                <h3 className="text-xl font-bold text-blue-600 mb-2">{edu.degree}</h3>
+                <h3 className="text-xl font-bold text-blue-600 mb-2">{edu.degree}{(edu.CGPA)}</h3>
                 <h3 className="text-xl font-bold text-blue-600 mb-2">{edu.Stream}</h3>
                 <p className="text-gray-800 font-medium mb-2">{edu.institution}</p>
                 <div className="flex justify-between text-gray-600">
