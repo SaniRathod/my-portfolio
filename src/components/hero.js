@@ -45,7 +45,7 @@ export default function Hero() {
               <Github className="w-6 h-6 text-white" />
             </a>
             <a
-              href="mailto:avishkarkabadi3444@gmail.com"
+              href="mailto:sanirathod8975@gmail.com"
               className="bg-black rounded-full p-3 hover:bg-blue-600 transition-colors hover:scale-110 transform duration-200"
             >
               <Mail className="w-6 h-6 text-white" />
