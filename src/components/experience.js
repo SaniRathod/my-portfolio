@@ -7,7 +7,7 @@ export default function Experience() {
       title: "Jr Software Developer",
       company: "The Data Tech Labs",
       duration: "Oct 2024 - Present",
-      description: "Currently working on IMSG application for ICICI Bank, it's proprietary Property Sourcing Application It digitizes and automates the process of identifying and evaluating properties. This significantly improves operational efficiency and resource utilization for the bank.",
+      description: "Currently working on IMSG application for Bank, it's proprietary Property Sourcing Application It digitizes and automates the process of identifying and evaluating properties. This significantly improves operational efficiency and resource utilization for the bank.",
     },
     {
       title: "Software Developer Intern",
