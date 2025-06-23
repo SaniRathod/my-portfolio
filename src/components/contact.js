@@ -17,7 +17,7 @@ export default function Contact() {
     {
       icon: <MapPin className="w-6 h-6" />,
       label: "Location",
-      value: "Pusad, Yavatmal",
+      value: "Pune, Maharashtra",
       href: "#",
     },
     {

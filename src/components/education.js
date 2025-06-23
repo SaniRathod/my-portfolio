@@ -1,7 +1,7 @@
 export default function Education() {
     const education = [
       {
-        degree: "B.E(Computer Engineering)",
+        degree: "B.E(Computer Engineering)              ",
         CGPA: 7.64,
         institution: "Jagadambha College Of Engineering and Technology, Yavatmal",
         duration: "2020 – 2024",
@@ -9,14 +9,14 @@ export default function Education() {
       },
       {
         Stream : "HSC",
-        Percentage: 71.08,
+        percentage: 71.08,
         institution: "Atahar Mirza Jr College Kali (DK)",
         duration: "2018 – 2019",
         location: "kali (DK), India",
       },
       {
         Stream : "SSC",
-        Percentage: 80.00,
+        percentage: 80.00,
         institution: "Vasantarao Naik School Kali (DK)",
         duration: "2016 – 2017",
         location: "kali (DK), India",
