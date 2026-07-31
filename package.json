@@ -2,12 +2,16 @@
   "name": "my-portfolio",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^1.0.6",
+    "@supabase/supabase-js": "^2.111.0",
+    "canvas-confetti": "^1.9.4",
     "cra-template": "1.2.0",
     "formik": "^2.4.6",
-    "lucide-react": "^0.469.0",
+    "framer-motion": "^12.43.0",
+    "lucide-react": "^1.28.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.1",
@@ -16,10 +20,10 @@
     "yup": "^1.6.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -40,8 +44,10 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17"
+    "@vitejs/plugin-react": "^6.0.5",
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.25",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.2.0"
   }
 }
