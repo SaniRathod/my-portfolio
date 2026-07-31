@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, Lock, Key, Plus, Trash2, Edit3, Save, ShieldCheck, Settings, Eye, EyeOff, MessageSquare, Briefcase, Code, Cpu } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Lock, Key, Plus, Trash2, Edit3, ShieldCheck, Settings, Eye, EyeOff, MessageSquare, Briefcase, Code, Cpu, LogOut } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import confetti from 'canvas-confetti';
 
@@ -19,7 +19,11 @@ export default function AdminModal() {
     setSiteSettings,
   } = useTheme();
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // Remember admin authentication in session storage so password is only entered ONCE per session!
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return sessionStorage.getItem('sani-admin-auth') === 'true';
+  });
+
   const [passcode, setPasscode] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState('');
@@ -65,11 +69,18 @@ export default function AdminModal() {
     e.preventDefault();
     if (passcode === 'Sani@204971' || passcode === 'sani2026' || passcode === 'varnilix') {
       setIsAuthenticated(true);
+      sessionStorage.setItem('sani-admin-auth', 'true');
       setAuthError('');
       confetti({ particleCount: 90, spread: 70 });
     } else {
       setAuthError('Incorrect passcode!');
     }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    sessionStorage.removeItem('sani-admin-auth');
+    setPasscode('');
   };
 
   // EXPERIENCE CRUD
@@ -210,19 +221,33 @@ export default function AdminModal() {
             </div>
             <div>
               <h2 className="text-xl font-bold text-white">Sani Rathod — Studio Admin Control Center</h2>
-              <p className="text-slate-400 text-xs mt-0.5">Real-Time Dynamic Website Controller & Content Manager</p>
+              <p className="text-slate-400 text-xs mt-0.5">
+                {isAuthenticated ? "Session Unlocked • Single Password Memory Active" : "Real-Time Dynamic Website Controller & Content Manager"}
+              </p>
             </div>
           </div>
 
-          <button
-            onClick={() => setIsAdminOpen(false)}
-            className="text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition-colors"
-          >
-            <X className="w-6 h-6" />
-          </button>
+          <div className="flex items-center space-x-3">
+            {isAuthenticated && (
+              <button
+                onClick={handleLogout}
+                title="Lock / Logout Admin"
+                className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-red-950/60 border border-red-800/80 text-red-400 hover:bg-red-900/60 text-xs font-semibold transition-colors"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span>Lock Admin</span>
+              </button>
+            )}
+            <button
+              onClick={() => setIsAdminOpen(false)}
+              className="text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
         </div>
 
-        {/* Clean Masked Password Login Gate */}
+        {/* Clean Masked Password Login Gate (Only shown if NOT authenticated in session) */}
         {!isAuthenticated ? (
           <div className="p-10 text-center max-w-md mx-auto my-auto space-y-6">
             <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto shadow-xl">
@@ -230,7 +255,7 @@ export default function AdminModal() {
             </div>
             <div>
               <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Admin Security Authentication</h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Enter your admin passcode to manage portfolio content.</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Enter password once to unlock Admin Panel for your session.</p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-4">
@@ -304,7 +329,7 @@ export default function AdminModal() {
             {/* Content Panel Area */}
             <div className="flex-1 p-6 md:p-8 overflow-y-auto space-y-8 text-slate-800 dark:text-slate-200">
               
-              {/* Tab 1: Work Experience Manager (Add & Edit) */}
+              {/* Tab 1: Work Experience Manager */}
               {activeAdminTab === 'experience' && (
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
@@ -435,7 +460,7 @@ export default function AdminModal() {
                 </div>
               )}
 
-              {/* Tab 2: Projects Manager (Add & Edit) */}
+              {/* Tab 2: Projects Manager */}
               {activeAdminTab === 'projects' && (
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
@@ -544,7 +569,7 @@ export default function AdminModal() {
                 </div>
               )}
 
-              {/* Tab 3: Skills Manager (Add & Edit) */}
+              {/* Tab 3: Skills Manager */}
               {activeAdminTab === 'skills' && (
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">

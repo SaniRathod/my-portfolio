@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ArrowRight, Download, Terminal, Sparkles, Code2, Database, Building2 } from "lucide-react";
+import { ArrowRight, Download, Terminal, Code2, Database, Building2 } from "lucide-react";
 import { GithubIcon, LinkedinIcon, MailIcon } from "./SocialIcons";
 import { useTheme } from "../context/ThemeContext";
 
@@ -145,7 +145,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Clean Circular Profile Frame */}
+          {/* Right Column: Clean Circular Profile Frame Without Overlay Skill Chips */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
             <div className="relative w-80 h-80 sm:w-[420px] sm:h-[420px]">
               {/* Outer Glowing Circle Aura */}
@@ -166,22 +166,6 @@ export default function Hero() {
                     }}
                   />
                 </div>
-              </div>
-
-              {/* Floating Tech Chips around Circle Avatar */}
-              <div className="absolute top-2 -left-2 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl flex items-center space-x-2 animate-float z-20">
-                <Code2 className="w-4 h-4 text-emerald-500" />
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200">Next.js 16 & TS</span>
-              </div>
-
-              <div className="absolute top-1/2 -right-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl flex items-center space-x-2 animate-float delay-500 z-20">
-                <Database className="w-4 h-4 text-cyan-500" />
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200">PostgreSQL DB</span>
-              </div>
-
-              <div className="absolute -bottom-2 left-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl flex items-center space-x-2 animate-float delay-1000 z-20">
-                <Sparkles className="w-4 h-4 text-purple-500" />
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200">UWMS Engine</span>
               </div>
             </div>
           </div>
