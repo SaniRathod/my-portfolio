@@ -22,7 +22,7 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "build": "vite build",
+    "build": "vite build && node -e \"import('fs').then(fs => fs.cpSync('dist', 'build', {recursive: true}))\"",
     "preview": "vite preview"
   },
   "eslintConfig": {
