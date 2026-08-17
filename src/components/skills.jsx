@@ -1,137 +1,116 @@
-import React, { useState } from "react";
-import { Code, Server, Database, Wrench, Search, Cpu } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
+import React from "react";
+import { Code, Server, Database, Wrench, Cpu } from "lucide-react";
 
-const CATEGORY_METADATA = {
-  "Front End Technologies": { icon: Code, color: "from-blue-500 to-cyan-500" },
-  "Backend Technologies": { icon: Server, color: "from-purple-500 to-indigo-500" },
-  "Database Architecture": { icon: Database, color: "from-emerald-500 to-teal-500" },
-  "Tools & Methodologies": { icon: Wrench, color: "from-amber-500 to-orange-500" },
-};
+const SKILL_CATEGORIES = [
+  {
+    title: "Frontend Architecture",
+    icon: Code,
+    color: "from-[#00e5ff] to-[#0096c7]",
+    skills: [
+      { name: "Next.js 16 (App Router)", percent: 92 },
+      { name: "TypeScript", percent: 90 },
+      { name: "React.js & Hooks", percent: 90 },
+      { name: "Tailwind CSS", percent: 95 },
+      { name: "FlutterFlow / UI", percent: 78 },
+    ],
+  },
+  {
+    title: "Backend & Microservices",
+    icon: Server,
+    color: "from-[#10b981] to-[#059669]",
+    skills: [
+      { name: "Core JAVA (OOP / Streams)", percent: 92 },
+      { name: "Spring Boot", percent: 88 },
+      { name: "Spring Security (RBAC / JWT)", percent: 85 },
+      { name: "RESTful APIs & Microservices", percent: 92 },
+      { name: "Python", percent: 70 },
+    ],
+  },
+  {
+    title: "Database Engineering",
+    icon: Database,
+    color: "from-[#6366f1] to-[#4f46e5]",
+    skills: [
+      { name: "PostgreSQL", percent: 90 },
+      { name: "Supabase DB & RLS", percent: 88 },
+      { name: "MySQL & Query Indexing", percent: 88 },
+      { name: "MS SQL Server", percent: 82 },
+    ],
+  },
+  {
+    title: "Cloud Containers & DevOps",
+    icon: Wrench,
+    color: "from-[#a855f7] to-[#7c3aed]",
+    skills: [
+      { name: "AWS App Runner", percent: 80 },
+      { name: "Docker Containers", percent: 78 },
+      { name: "Git & GitHub Version Control", percent: 92 },
+      { name: "Postman API Testing", percent: 90 },
+      { name: "Jira / Scrum Workflow", percent: 88 },
+    ],
+  },
+];
+
+const TECH_BADGES = [
+  "⚡ Next.js 16",
+  "🟦 TypeScript",
+  "☕ Core JAVA",
+  "🍃 Spring Boot",
+  "🔐 Spring Security",
+  "🗄️ PostgreSQL",
+  "⚡ Supabase DB",
+  "🐬 MySQL",
+  "☁️ AWS App Runner",
+  "🐳 Docker",
+  "📦 REST APIs",
+  "🐙 Git & GitHub",
+  "🧪 Postman",
+  "📋 Jira / Agile",
+  "🎨 Tailwind CSS",
+  "🔥 Redux Toolkit",
+  "📊 Excel Parsers",
+  "💼 Wage Ledgers",
+];
 
 export default function Skills() {
-  const { skillsList } = useTheme();
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
-
-  // Group skills by category
-  const categoriesMap = skillsList.reduce((acc, skill) => {
-    const cat = skill.category || "Other";
-    if (!acc[cat]) acc[cat] = [];
-    acc[cat].push(skill);
-    return acc;
-  }, {});
-
-  const categories = Object.entries(categoriesMap).map(([name, skills]) => ({
-    name,
-    icon: CATEGORY_METADATA[name]?.icon || Code,
-    color: CATEGORY_METADATA[name]?.color || "from-emerald-500 to-teal-500",
-    skills,
-  }));
-
-  const filteredCategories = categories.map((cat) => {
-    const isCategoryMatch = selectedCategory === "All" || cat.name === selectedCategory;
-    const matchingSkills = cat.skills.filter((skill) =>
-      skill.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    if (isCategoryMatch && matchingSkills.length > 0) {
-      return { ...cat, skills: matchingSkills };
-    }
-    return null;
-  }).filter(Boolean);
-
   return (
-    <section id="skills" className="py-24 bg-slate-50 dark:bg-slate-950 transition-colors relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-24 border-b border-white/[0.04] bg-[#0c101c]/30">
+      <div className="w-[min(1200px,calc(100%-40px))] mx-auto">
         
-        {/* Section Title */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/60 px-3.5 py-1.5 rounded-full mb-3">
-            <Cpu className="w-3.5 h-3.5" />
-            <span>Technical Capabilities</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-            Skills & <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">Tech Stack</span>
-          </h2>
-          <div className="w-20 h-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 mx-auto mt-4 rounded-full"></div>
-        </div>
+        {/* Section Header */}
+        <p className="section-tag">05 — Tech Matrix</p>
+        <h2 className="section-heading">Technical capabilities &amp; depth</h2>
+        <p className="text-[#94a3b8] text-sm sm:text-base max-w-xl mb-12 leading-relaxed">
+          Comprehensive stack across enterprise frontend architectures, secure Java backends, and containerized cloud delivery.
+        </p>
 
-        {/* Filter Controls */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-2 justify-center">
-            <button
-              onClick={() => setSelectedCategory("All")}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
-                selectedCategory === "All"
-                  ? "bg-purple-600 text-white shadow-lg shadow-purple-500/25"
-                  : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800"
-              }`}
-            >
-              All Skills
-            </button>
-            {categories.map((cat) => (
-              <button
-                key={cat.name}
-                onClick={() => setSelectedCategory(cat.name)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
-                  selectedCategory === cat.name
-                    ? "bg-purple-600 text-white shadow-lg shadow-purple-500/25"
-                    : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800"
-                }`}
-              >
-                {cat.name}
-              </button>
-            ))}
-          </div>
-
-          {/* Search Box */}
-          <div className="relative w-full md:w-64">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search skill (e.g. Next.js, Java, Postgres)..."
-              className="w-full pl-9 pr-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-xs font-medium focus:outline-none focus:border-purple-500"
-            />
-          </div>
-        </div>
-
-        {/* Skills Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {filteredCategories.map((category) => {
-            const IconComponent = category.icon;
+        {/* 2x2 Skills Grid */}
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
+          {SKILL_CATEGORIES.map((category, cIdx) => {
+            const IconComp = category.icon;
             return (
-              <div
-                key={category.name}
-                className="bg-white dark:bg-slate-900 p-7 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl hover:shadow-2xl transition-all duration-300 group"
-              >
-                <div className="flex items-center space-x-3 mb-6">
-                  <div className={`p-3 rounded-2xl bg-gradient-to-r ${category.color} text-white shadow-lg`}>
-                    <IconComponent className="w-6 h-6" />
+              <div key={cIdx} className="sr-card p-6 sm:p-7">
+                <div className="flex items-center gap-2.5 mb-6">
+                  <div className="p-2 rounded-xl bg-gradient-to-tr from-[#00e5ff]/10 to-[#6366f1]/10 border border-white/10 text-[#00e5ff]">
+                    <IconComp className="w-4 h-4" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">{category.name}</h3>
+                  <h3 className="font-mono text-xs font-bold uppercase tracking-widest text-[#94a3b8]">
+                    {category.title}
+                  </h3>
                 </div>
 
                 <div className="space-y-4">
-                  {category.skills.map((skill) => (
-                    <div key={skill.name} className="space-y-1.5">
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
-                          {skill.name}
-                        </span>
-                        <span className="text-xs font-semibold text-purple-600 dark:text-purple-400">
-                          {skill.level} ({skill.percent}%)
-                        </span>
+                  {category.skills.map((skill, sIdx) => (
+                    <div key={sIdx} className="space-y-1.5">
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="font-medium text-[#f1f5f9]">{skill.name}</span>
+                        <span className="font-mono font-semibold text-[#00e5ff]">{skill.percent}%</span>
                       </div>
                       
-                      {/* Animated Skill Progress Meter */}
-                      <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                      {/* Skill Meter Bar */}
+                      <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
                         <div
-                          className={`h-full rounded-full bg-gradient-to-r ${category.color} transition-all duration-1000`}
+                          className={`h-full bg-gradient-to-r ${category.color} rounded-full transition-all duration-1000 ease-out`}
                           style={{ width: `${skill.percent}%` }}
                         ></div>
                       </div>
@@ -141,6 +120,18 @@ export default function Skills() {
               </div>
             );
           })}
+        </div>
+
+        {/* Tech Cloud */}
+        <div className="flex flex-wrap gap-2 justify-center pt-4">
+          {TECH_BADGES.map((badge, bIdx) => (
+            <span
+              key={bIdx}
+              className="sr-card !py-2 !px-4 text-xs font-semibold text-[#94a3b8] hover:text-[#f1f5f9] hover:border-[#00e5ff]/50 transition-all cursor-default"
+            >
+              {badge}
+            </span>
+          ))}
         </div>
 
       </div>

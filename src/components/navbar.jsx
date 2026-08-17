@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon, Terminal, FileText, ShieldCheck } from "lucide-react";
+import { Menu, X, Terminal, FileText, ShieldCheck, ArrowUpRight, Sparkles } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
-const navLinks = [
-  { href: "#home", label: "Home" },
+const NAV_ITEMS = [
   { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
   { href: "#experience", label: "Experience" },
-  { href: "#work", label: "Projects" },
+  { href: "#work", label: "Work" },
+  { href: "#skills", label: "Skills" },
+  { href: "#expertise", label: "Expertise" },
   { href: "#education", label: "Education" },
   { href: "#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("about");
 
-  const { theme, toggleTheme, toggleTerminal, toggleResume, toggleAdmin } = useTheme();
+  const { toggleResume, toggleTerminal, toggleAdmin } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 20);
 
-      const sections = navLinks.map((link) => link.href.replace("#", ""));
-      const current = sections.find((section) => {
-        const el = document.getElementById(section);
+      const sectionIds = ["hero", "about", "experience", "work", "skills", "expertise", "education", "contact"];
+      const current = sectionIds.find((id) => {
+        const el = document.getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          return rect.top <= 150 && rect.bottom >= 150;
+          return rect.top <= 180 && rect.bottom >= 180;
         }
         return false;
       });
@@ -37,60 +37,64 @@ export default function Navbar() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (e, href) => {
+  const handleLinkClick = (e, href) => {
     e.preventDefault();
-    const targetId = href.replace("#", "");
-    const elem = document.getElementById(targetId);
-    elem?.scrollIntoView({ behavior: "smooth" });
-    setIsOpen(false);
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsDrawerOpen(false);
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-800/60 shadow-lg shadow-black/5"
-          : "bg-transparent py-2"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+          isScrolled
+            ? "bg-[#06080f]/90 backdrop-blur-xl border-b border-white/10 shadow-2xl py-3"
+            : "bg-transparent py-4 sm:py-5"
+        }`}
+      >
+        <div className="w-[min(1200px,calc(100%-40px))] mx-auto flex items-center justify-between">
+          
+          {/* Custom Brand Logo */}
           <a
-            href="#home"
-            onClick={(e) => handleNavClick(e, "#home")}
-            className="flex items-center space-x-2 group"
+            href="#hero"
+            onClick={(e) => handleLinkClick(e, "#hero")}
+            className="flex items-center gap-3 group"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-105 transition-transform duration-300">
-              S
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#00e5ff] via-[#6366f1] to-[#a855f7] p-[1.5px] shadow-[0_0_20px_rgba(0,229,255,0.25)] group-hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] transition-all">
+              <div className="w-full h-full bg-[#06080f] rounded-xl flex items-center justify-center font-black text-sm text-white">
+                SR
+              </div>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <span className="font-bold text-sm tracking-tight text-[#f1f5f9] group-hover:text-[#00e5ff] transition-colors">
                 Sani Rathod
               </span>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-blue-600 dark:text-blue-400 -mt-1">
-                Full Stack Dev
+              <span className="font-mono text-[9px] uppercase tracking-widest text-[#64748b]">
+                Software Dev
               </span>
             </div>
           </a>
 
-          {/* Desktop Links */}
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 bg-slate-100/70 dark:bg-slate-900/60 p-1.5 rounded-full border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-md">
-            {navLinks.map((link) => {
+          {/* Desktop Nav Links */}
+          <nav className="hidden lg:flex items-center space-x-1 bg-[#0c101c]/80 border border-white/10 px-3 py-1.5 rounded-full backdrop-blur-md shadow-lg">
+            {NAV_ITEMS.map((link) => {
               const isActive = activeSection === link.href.replace("#", "");
               return (
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
+                  onClick={(e) => handleLinkClick(e, link.href)}
+                  className={`text-xs font-semibold px-3.5 py-1.5 rounded-full transition-all ${
                     isActive
-                      ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
-                      : "text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50"
+                      ? "text-white bg-gradient-to-r from-[#00e5ff]/20 to-[#6366f1]/20 border border-[#00e5ff]/30 shadow-sm"
+                      : "text-[#94a3b8] hover:text-white hover:bg-white/5"
                   }`}
                 >
                   {link.label}
@@ -99,101 +103,142 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Action Buttons */}
-          <div className="hidden md:flex items-center space-x-2.5">
-            {/* Terminal Trigger */}
+          {/* Right Action Buttons */}
+          <div className="hidden sm:flex items-center space-x-2.5">
+            {/* Terminal Shell Button */}
             <button
               onClick={toggleTerminal}
               title="Open Developer Terminal (Ctrl+K)"
-              className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 border border-slate-200 dark:border-slate-800 transition-all hover:scale-105"
+              className="p-2.5 rounded-xl bg-[#0c101c] border border-white/10 text-[#94a3b8] hover:text-[#00e5ff] hover:border-[#00e5ff]/30 transition-all hover:scale-105"
             >
               <Terminal className="w-4 h-4" />
             </button>
 
-            {/* Resume Trigger */}
-            <button
-              onClick={toggleResume}
-              className="flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 border border-slate-200 dark:border-slate-800 transition-all text-xs font-semibold hover:scale-105"
-            >
-              <FileText className="w-3.5 h-3.5 text-blue-500" />
-              <span>Resume</span>
-            </button>
-
-            {/* Admin Dashboard Trigger */}
+            {/* Admin Dashboard */}
             <button
               onClick={toggleAdmin}
               title="Open Admin Dashboard"
-              className="flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white transition-all text-xs font-semibold hover:scale-105 shadow-md shadow-blue-500/20"
-            >
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Admin</span>
-            </button>
-
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle Theme"
-              className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 transition-all hover:scale-105"
-            >
-              {theme === "dark" ? (
-                <Sun className="w-4 h-4 text-amber-400 animate-spin-slow" />
-              ) : (
-                <Moon className="w-4 h-4 text-indigo-600" />
-              )}
-            </button>
-          </div>
-
-          {/* Mobile Right Controls */}
-          <div className="flex md:hidden items-center space-x-2">
-            <button
-              onClick={toggleAdmin}
-              className="p-2 rounded-lg bg-blue-600 text-white"
+              className="p-2.5 rounded-xl bg-[#0c101c] border border-white/10 text-[#94a3b8] hover:text-[#a855f7] hover:border-[#a855f7]/30 transition-all hover:scale-105"
             >
               <ShieldCheck className="w-4 h-4" />
             </button>
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300"
-            >
-              {theme === "dark" ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-600" />}
-            </button>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-blue-600"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
 
-      {/* Mobile Drawer */}
-      {isOpen && (
-        <div className="md:hidden bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-2 animate-fade-in">
-          <div className="flex items-center justify-between py-2 border-b border-slate-100 dark:border-slate-900 mb-2">
-            <span className="text-xs font-semibold text-emerald-500 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-              Varnilix Pvt Ltd (Hinjewadi Phase 1)
-            </span>
+            {/* Download CV (triggers ResumeModal with email dispatch) */}
             <button
               onClick={toggleResume}
-              className="text-xs font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1"
+              className="sr-btn-ghost !text-xs !py-2 !px-3.5"
             >
-              <FileText className="w-3.5 h-3.5" /> View Resume
+              <FileText className="w-3.5 h-3.5 text-[#00e5ff]" />
+              <span>Download CV</span>
+            </button>
+
+            {/* Hire Me CTA */}
+            <a
+              href="#contact"
+              onClick={(e) => handleLinkClick(e, "#contact")}
+              className="sr-btn-primary !text-xs !py-2 !px-4"
+            >
+              <span>Hire Me</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          {/* Mobile Right Bar */}
+          <div className="flex sm:hidden items-center space-x-2">
+            <button
+              onClick={toggleResume}
+              className="sr-btn-ghost !text-xs !py-1.5 !px-2.5"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#00e5ff]" />
+              <span>CV</span>
+            </button>
+
+            <button
+              onClick={() => setIsDrawerOpen(true)}
+              className="p-2 rounded-xl bg-[#0c101c] border border-white/10 text-[#f1f5f9]"
+              aria-label="Open menu"
+            >
+              <Menu className="w-5 h-5" />
             </button>
           </div>
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-900 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+
+        </div>
+      </header>
+
+      {/* Mobile Drawer */}
+      {isDrawerOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md lg:hidden animate-fade-in"
+          onClick={() => setIsDrawerOpen(false)}
+        >
+          <div
+            className="fixed top-0 right-0 bottom-0 w-[min(320px,85vw)] bg-[#0c101c] border-l border-white/10 p-6 flex flex-col justify-between"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div>
+              <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#00e5ff] to-[#6366f1] flex items-center justify-center font-bold text-xs text-white">
+                    SR
+                  </div>
+                  <span className="font-bold text-sm text-[#f1f5f9]">Sani Rathod</span>
+                </div>
+                <button
+                  onClick={() => setIsDrawerOpen(false)}
+                  className="p-2 text-[#94a3b8] hover:text-white"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="space-y-1">
+                {NAV_ITEMS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => handleLinkClick(e, link.href)}
+                    className="block px-3 py-2.5 rounded-xl text-sm font-semibold text-[#94a3b8] hover:text-white hover:bg-white/5 transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2.5 pt-6 border-t border-white/10">
+              <button
+                onClick={() => {
+                  setIsDrawerOpen(false);
+                  toggleResume();
+                }}
+                className="sr-btn-ghost w-full justify-center !text-xs !py-2.5"
+              >
+                <FileText className="w-4 h-4 text-[#00e5ff]" />
+                <span>Download CV (PDF)</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsDrawerOpen(false);
+                  toggleAdmin();
+                }}
+                className="sr-btn-ghost w-full justify-center !text-xs !py-2.5 text-[#a855f7]"
+              >
+                <ShieldCheck className="w-4 h-4 text-[#a855f7]" />
+                <span>Admin Dashboard</span>
+              </button>
+
+              <a
+                href="#contact"
+                onClick={(e) => handleLinkClick(e, "#contact")}
+                className="sr-btn-primary w-full justify-center !text-xs !py-2.5"
+              >
+                <span>Hire Me</span>
+              </a>
+            </div>
+          </div>
         </div>
       )}
-    </header>
+    </>
   );
 }

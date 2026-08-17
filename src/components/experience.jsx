@@ -6,99 +6,110 @@ export default function Experience() {
   const { experiences } = useTheme();
 
   return (
-    <section id="experience" className="py-24 bg-white dark:bg-slate-900 transition-colors relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-24 border-b border-white/[0.04] bg-[#0c101c]/40">
+      <div className="w-[min(1200px,calc(100%-40px))] mx-auto">
         
-        {/* Title Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3.5 py-1.5 rounded-full mb-3">
-            <Briefcase className="w-3.5 h-3.5" />
-            <span>Career Journey</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-            Work <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600">Experience</span>
-          </h2>
-          <div className="w-20 h-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto mt-4 rounded-full"></div>
-        </div>
+        {/* Section Header */}
+        <p className="section-tag">02 — Career Journey</p>
+        <h2 className="section-heading">Engineering trajectory &amp; impact</h2>
+        <p className="text-[#94a3b8] text-sm sm:text-base max-w-xl mb-12 leading-relaxed">
+          From full-stack engineering internships to architecting multi-project wage engines and banking microservices.
+        </p>
 
-        {/* Timeline Items */}
-        <div className="relative max-w-4xl mx-auto space-y-12">
-          {/* Vertical Connecting Line */}
-          <div className="absolute left-4 md:left-1/2 top-4 bottom-4 w-0.5 bg-slate-200 dark:bg-slate-800 -translate-x-1/2 hidden md:block"></div>
-
-          {experiences.map((exp, index) => {
-            const isEven = index % 2 === 0;
+        {/* Timeline Stack */}
+        <div className="space-y-6">
+          {experiences.map((exp, idx) => {
+            const isCurrent = exp.badge === "Current Role" || idx === 0;
             return (
-              <div
-                key={exp.id || index}
-                className={`relative flex flex-col md:flex-row items-center ${
-                  isEven ? "md:flex-row-reverse" : ""
+              <article
+                key={exp.id || idx}
+                className={`sr-card p-6 sm:p-8 relative overflow-hidden transition-all ${
+                  isCurrent ? "border-[#10b981]/30 shadow-[0_0_40px_rgba(16,185,129,0.08)]" : ""
                 }`}
               >
-                {/* Center Node */}
-                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/30 z-10 hidden md:flex">
-                  <Briefcase className="w-4 h-4" />
+                {/* Glowing Top Edge */}
+                <div
+                  className={`absolute top-0 left-0 right-0 h-[2px] ${
+                    isCurrent
+                      ? "bg-gradient-to-r from-[#10b981] via-[#00e5ff] to-[#6366f1]"
+                      : "bg-gradient-to-r from-[#00e5ff] to-[#a855f7] opacity-50"
+                  }`}
+                ></div>
+
+                {/* Meta Row */}
+                <div className="flex flex-wrap items-center gap-3 mb-3">
+                  <span className="font-mono text-xs font-semibold text-[#00e5ff] bg-[#00e5ff]/10 border border-[#00e5ff]/25 px-2.5 py-1 rounded-md">
+                    {exp.duration}
+                  </span>
+
+                  {isCurrent && (
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-wider uppercase text-[#10b981] bg-[#10b981]/10 border border-[#10b981]/30 px-3 py-0.5 rounded-full">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
+                      Current Position
+                    </span>
+                  )}
+
+                  <span className="text-xs text-[#64748b] font-medium flex items-center gap-1">
+                    <Building2 className="w-3.5 h-3.5" />
+                    <span>{exp.company} • {exp.location}</span>
+                  </span>
                 </div>
 
-                {/* Content Box */}
-                <div className="w-full md:w-1/2 px-0 md:px-8">
-                  <div className="bg-slate-50 dark:bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl hover:shadow-2xl transition-all duration-300">
-                    
-                    <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                      <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950/80 px-3 py-1 rounded-full">
-                        {exp.badge}
+                {/* Role Title */}
+                <h3 className="text-xl sm:text-2xl font-bold text-[#f1f5f9] tracking-tight mb-2">
+                  {exp.title}
+                </h3>
+
+                {/* Summary */}
+                <p className="text-xs sm:text-sm text-[#94a3b8] leading-relaxed mb-4">
+                  {exp.description}
+                </p>
+
+                {/* Key Accomplishments */}
+                {exp.achievements && (
+                  <ul className="space-y-2 mb-6 text-xs sm:text-sm text-[#94a3b8]">
+                    {exp.achievements.map((item, aIdx) => (
+                      <li key={aIdx} className="flex items-start gap-2.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#00e5ff] mt-2 flex-shrink-0"></span>
+                        <span className="leading-relaxed text-[#f1f5f9]">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {/* Tools Chips */}
+                {exp.skills && (
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
+                    {exp.skills.map((tool, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="font-mono text-[10px] font-medium text-[#94a3b8] px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/10"
+                      >
+                        {tool}
                       </span>
-                      <div className="flex items-center space-x-1 text-xs text-slate-500 dark:text-slate-400 font-semibold">
-                        <Calendar className="w-3.5 h-3.5 text-emerald-500" />
-                        <span>{exp.duration}</span>
-                      </div>
-                    </div>
-
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{exp.title}</h3>
-                    <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 mt-1">{exp.company}</p>
-
-                    <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-1 mb-4">
-                      <MapPin className="w-3 h-3 text-slate-400" /> {exp.location}
-                    </p>
-
-                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
-                      {exp.description}
-                    </p>
-
-                    {/* Achievements List */}
-                    {exp.achievements && (
-                      <div className="space-y-2 mb-6">
-                        {exp.achievements.map((ach, aIdx) => (
-                          <div key={aIdx} className="flex items-start space-x-2 text-xs text-slate-700 dark:text-slate-300">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                            <span>{ach}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Tech Stack Pills */}
-                    {exp.skills && (
-                      <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-200 dark:border-slate-800">
-                        {exp.skills.map((skill, sIdx) => (
-                          <span
-                            key={sIdx}
-                            className="px-2.5 py-1 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 rounded-lg text-[11px] font-mono font-medium"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
+                    ))}
                   </div>
-                </div>
-              </div>
+                )}
+              </article>
             );
           })}
         </div>
 
       </div>
     </section>
+  );
+}
+
+function Building2(props) {
+  return (
+    <svg {...props} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/>
+      <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/>
+      <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/>
+      <path d="M10 6h4"/>
+      <path d="M10 10h4"/>
+      <path d="M10 14h4"/>
+      <path d="M10 18h4"/>
+    </svg>
   );
 }

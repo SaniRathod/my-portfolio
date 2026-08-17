@@ -1,201 +1,345 @@
-import React, { useState, useEffect } from "react";
-import { ArrowRight, Download, Terminal, Code2, Database, Building2 } from "lucide-react";
-import { GithubIcon, LinkedinIcon, MailIcon } from "./SocialIcons";
+import React, { useState } from "react";
+import { ArrowRight, Download, FileText, CheckCircle2, ChevronDown, Sparkles, Building2, Terminal, Layers, ShieldCheck, Cpu, Database, Cloud, Server } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
-const ROLES = [
-  "Software Developer @ Varnilix ⚡",
-  "Next.js 16 & TypeScript Engineer 🚀",
-  "PostgreSQL & Supabase Specialist 🗄️",
-  "Java & Spring Boot Developer ☕",
-];
+const ARCHITECTURES = {
+  uwms: {
+    id: "uwms",
+    badge: "Production Ready · Multi-Tenant",
+    title: "UWMS — Wage Engine Architecture",
+    description: "Enterprise multi-project contractual payroll & ledger pipeline",
+    stack: ["Next.js 16", "TypeScript", "PostgreSQL", "Supabase", "AWS App Runner"],
+    nodes: [
+      { step: "01", icon: "📊", label: "Ingestion", sub: "Timesheet Data" },
+      { step: "02", icon: "⚙️", label: "Math Engine", sub: "Pure-Function TS" },
+      { step: "03", icon: "🗄️", label: "Ledgers", sub: "PostgreSQL RLS" },
+      { step: "04", icon: "🚀", label: "Cloud Node", sub: "AWS App Runner" },
+    ],
+    highlights: [
+      { label: "Core Pattern", value: "Pure Mathematical Functions" },
+      { label: "Ledger State", value: "100% Immutable Records" },
+      { label: "Database", value: "Supabase Relational Schemas" },
+      { label: "Deployment", value: "Docker Containerized" },
+    ],
+    status: "✓ Production Pipeline Active",
+    statusColor: "text-[#10b981]",
+  },
+  imsg: {
+    id: "imsg",
+    badge: "Production Ready · Banking Security",
+    title: "IMSG — Bank Sourcing Architecture",
+    description: "Proprietary bank real-estate appraisal & property evaluation workflow",
+    stack: ["Java", "Spring Boot", "Spring Security", "MySQL", "React.js"],
+    nodes: [
+      { step: "01", icon: "🏛️", label: "Sourcing", sub: "Bank Appraisals" },
+      { step: "02", icon: "🔐", label: "RBAC Auth", sub: "Spring Security" },
+      { step: "03", icon: "⚡", label: "Core API", sub: "REST Services" },
+      { step: "04", icon: "💾", label: "Storage", sub: "Indexed MySQL" },
+    ],
+    highlights: [
+      { label: "Authorization", value: "Multi-Tier Role Security" },
+      { label: "Query Speed", value: "35% Faster Indexing" },
+      { label: "Microservices", value: "Spring Boot RESTful APIs" },
+      { label: "Front End", value: "React.js & FlutterFlow" },
+    ],
+    status: "✓ Bank System Verified",
+    statusColor: "text-[#00e5ff]",
+  },
+};
 
 export default function Hero() {
-  const { toggleResume, toggleTerminal, siteSettings } = useTheme();
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const { toggleResume, setSelectedProject, projects, siteSettings } = useTheme();
+  const [activeArch, setActiveArch] = useState("uwms");
 
-  useEffect(() => {
-    const currentRole = ROLES[roleIndex];
-    let timer;
-
-    if (!isDeleting && displayText.length < currentRole.length) {
-      timer = setTimeout(() => {
-        setDisplayText(currentRole.substring(0, displayText.length + 1));
-      }, 90);
-    } else if (!isDeleting && displayText.length === currentRole.length) {
-      timer = setTimeout(() => {
-        setIsDeleting(true);
-      }, 2000);
-    } else if (isDeleting && displayText.length > 0) {
-      timer = setTimeout(() => {
-        setDisplayText(currentRole.substring(0, displayText.length - 1));
-      }, 50);
-    } else if (isDeleting && displayText.length === 0) {
-      setIsDeleting(false);
-      setRoleIndex((prev) => (prev + 1) % ROLES.length);
-    }
-
-    return () => clearTimeout(timer);
-  }, [displayText, isDeleting, roleIndex]);
+  const currentArch = ARCHITECTURES[activeArch];
 
   return (
-    <section id="home" className="relative min-h-screen pt-28 pb-20 flex items-center justify-center overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors">
-      {/* Background Ambient Glowing Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 dark:bg-blue-600/20 rounded-full filter blur-3xl animate-pulse-glow pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 dark:bg-emerald-600/20 rounded-full filter blur-3xl animate-pulse-glow pointer-events-none delay-1000"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-between pt-[calc(72px+28px)] pb-10 border-b border-white/[0.04]">
+      <div className="w-[min(1200px,calc(100%-40px))] mx-auto flex-1 flex flex-col justify-center gap-10">
+        
+        {/* Main 2-Column Showcase */}
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
           
-          {/* Left Column: Text & CTAs */}
-          <div className="lg:col-span-7 space-y-6 text-left">
-            {/* Status Pill */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-300 text-xs font-semibold shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span>{siteSettings.availabilityStatus}</span>
+          {/* Left Column: Bio & Core Intro */}
+          <div className="space-y-5 text-left">
+            
+            {/* Live Availability Badge */}
+            <div className="inline-flex items-center gap-2 text-xs font-semibold text-[#10b981] bg-[#10b981]/10 border border-[#10b981]/25 px-3.5 py-1.5 rounded-full backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_#10b981] animate-pulse"></span>
+              <span>Available for high-impact software engineering roles</span>
             </div>
 
-            {/* Main Headline */}
-            <div>
-              <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
-                Hi There, I'm{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-emerald-600 to-indigo-600 dark:from-blue-400 dark:via-emerald-400 dark:to-indigo-400">
-                  {siteSettings.name || "Sani Rathod"}
-                </span>
-              </h1>
-              
-              <div className="h-14 mt-3 flex items-center text-xl sm:text-3xl font-bold text-slate-700 dark:text-slate-200">
-                <span>I Am Into&nbsp;</span>
-                <span className="text-emerald-600 dark:text-emerald-400 border-r-2 border-emerald-600 dark:border-emerald-400 pr-1 animate-pulse">
-                  {displayText}
-                </span>
-              </div>
-            </div>
-
-            {/* Paragraph Bio */}
-            <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed">
-              Software Developer at <strong className="text-slate-900 dark:text-slate-100">Varnilix Pvt Ltd</strong> (Hinjewadi Phase 1, Pune). Specializing in <strong className="text-emerald-600 dark:text-emerald-400">Next.js 16, TypeScript, PostgreSQL DB, Supabase</strong>, and Java Spring Boot microservices.
+            {/* Sub-Header */}
+            <p className="font-mono text-xs tracking-widest uppercase text-[#00e5ff] font-semibold">
+              Software Developer • Hinjewadi Phase 1, Pune, India
             </p>
 
-            {/* Current Position Tag */}
-            <div className="p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl inline-flex items-center space-x-3 text-xs font-semibold text-slate-700 dark:text-slate-300">
-              <Building2 className="w-4 h-4 text-emerald-500" />
-              <span>Current Project: <strong>UWMS (Unified Wage Management System)</strong></span>
+            <p className="text-sm font-medium text-[#94a3b8] -mt-3">
+              Varnilix Pvt Ltd
+            </p>
+
+            {/* Headline */}
+            <h1 className="font-serif text-5xl sm:text-7xl font-normal tracking-tight brand-name-gradient leading-[1.06]">
+              {siteSettings.name || "Sani Rathod"}
+            </h1>
+
+            {/* Editorial Bio */}
+            <p className="font-editorial text-base sm:text-lg text-[#94a3b8] max-w-xl leading-relaxed">
+              Software Developer architecting <strong className="text-[#f1f5f9]">production-ready web applications</strong> — including <strong className="text-[#00e5ff]">UWMS</strong> (multi-project contractual wage calculation engine with Next.js 16 &amp; Supabase) and <strong className="text-[#10b981]">IMSG</strong> (banking property evaluation system with Java Spring Boot &amp; Spring Security RBAC).
+            </p>
+
+            {/* Tech Stack Chips */}
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {[
+                "Next.js 16",
+                "TypeScript",
+                "Java",
+                "Spring Boot",
+                "Spring Security",
+                "PostgreSQL",
+                "Supabase",
+                "REST APIs",
+                "AWS App Runner",
+                "Docker",
+              ].map((tech) => (
+                <span
+                  key={tech}
+                  className="font-mono text-[11px] font-medium tracking-wide px-2.5 py-1 rounded-full bg-[#00e5ff]/[0.08] border border-[#00e5ff]/20 text-[#70f0ff] hover:border-[#00e5ff]/50 transition-colors"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
 
-            {/* CTAs Button Row */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a
-                href="#work"
-                className="group relative inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white px-7 py-3.5 rounded-2xl text-sm font-bold shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/40 transition-all duration-300 hover:-translate-y-0.5"
-              >
-                <span>View UWMS & Projects</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            {/* Call To Actions */}
+            <div className="flex flex-wrap items-center gap-3 pt-3">
+              <a href="#work" className="sr-btn-primary">
+                <span>View Production Systems —</span>
+              </a>
+
+              <a href="#contact" className="sr-btn-ghost">
+                <span>Schedule a Conversation</span>
               </a>
 
               <button
                 onClick={toggleResume}
-                className="inline-flex items-center space-x-2 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 px-6 py-3.5 rounded-2xl text-sm font-bold shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+                className="sr-btn-ghost"
               >
-                <Download className="w-4 h-4 text-blue-500" />
-                <span>View Resume</span>
-              </button>
-
-              <button
-                onClick={toggleTerminal}
-                title="Launch Developer CLI Shell"
-                className="p-3.5 rounded-2xl bg-slate-900 dark:bg-slate-800 text-emerald-400 hover:text-emerald-300 border border-slate-700 transition-all hover:scale-105"
-              >
-                <Terminal className="w-5 h-5" />
+                <Download className="w-3.5 h-3.5 text-[#00e5ff]" />
+                <span>Download CV</span>
               </button>
             </div>
 
-            {/* Social Links Row */}
-            <div className="flex items-center space-x-4 pt-4">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Connect:</span>
-              <div className="flex space-x-3">
-                <a
-                  href="https://in.linkedin.com/in/sani-rathod"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-3 bg-white dark:bg-slate-900 rounded-xl text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 border border-slate-200 dark:border-slate-800 hover:border-blue-500 transition-all hover:-translate-y-1 shadow-sm"
-                >
-                  <LinkedinIcon className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://github.com/SaniRathod"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-3 bg-white dark:bg-slate-900 rounded-xl text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 border border-slate-200 dark:border-slate-800 hover:border-purple-500 transition-all hover:-translate-y-1 shadow-sm"
-                >
-                  <GithubIcon className="w-5 h-5" />
-                </a>
-                <a
-                  href="mailto:sanirathod8975@gmail.com"
-                  className="p-3 bg-white dark:bg-slate-900 rounded-xl text-slate-700 dark:text-slate-300 hover:text-red-500 border border-slate-200 dark:border-slate-800 hover:border-red-500 transition-all hover:-translate-y-1 shadow-sm"
-                >
-                  <MailIcon className="w-5 h-5" />
-                </a>
-              </div>
+            {/* Trust Points */}
+            <div className="flex flex-wrap items-center gap-4 pt-3 text-xs text-[#64748b]">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#00e5ff]" />
+                B.E Computer Engineering (7.64 CGPA)
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981]" />
+                UWMS Enterprise Engine
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#a855f7]" />
+                IMSG Banking Security RBAC
+              </span>
             </div>
           </div>
 
-          {/* Right Column: Clean Circular Profile Frame Without Overlay Skill Chips */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
-            <div className="relative w-80 h-80 sm:w-[420px] sm:h-[420px]">
-              {/* Outer Glowing Circle Aura */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600 animate-spin-slow opacity-85 blur-xl"></div>
+          {/* Right Column: Unique Interactive Production Architecture Console */}
+          <div className="space-y-4">
+            <div className="sr-card p-6 sm:p-7 border-[#00e5ff]/20 shadow-[0_0_50px_rgba(0,229,255,0.08)]">
               
-              {/* Circular Container */}
-              <div className="relative w-full h-full rounded-full p-3 bg-white dark:bg-slate-950 shadow-2xl">
-                <div className="w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-slate-900 relative bg-slate-950 flex items-center justify-center">
-                  <img
-                    src="/Sani_Profile_2.png"
-                    alt="Sani Rathod Profile"
-                    className="w-full h-full object-cover transition-all duration-300"
-                    style={{
-                      objectPosition: "50% 38%",
-                    }}
-                    onError={(e) => {
-                      e.target.src = "/Sani_Profile.jpeg";
-                    }}
-                  />
+              {/* Architecture Selector Switcher Tabs */}
+              <div className="flex items-center justify-between gap-2 pb-4 mb-4 border-b border-white/10 flex-wrap">
+                <div className="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/10">
+                  <button
+                    onClick={() => setActiveArch("uwms")}
+                    className={`text-xs font-mono font-bold px-3 py-1.5 rounded-lg transition-all ${
+                      activeArch === "uwms"
+                        ? "bg-[#00e5ff]/20 text-[#70f0ff] border border-[#00e5ff]/40 shadow-sm"
+                        : "text-[#64748b] hover:text-[#f1f5f9]"
+                    }`}
+                  >
+                    UWMS Wage Engine
+                  </button>
+
+                  <button
+                    onClick={() => setActiveArch("imsg")}
+                    className={`text-xs font-mono font-bold px-3 py-1.5 rounded-lg transition-all ${
+                      activeArch === "imsg"
+                        ? "bg-[#10b981]/20 text-[#34d399] border border-[#10b981]/40 shadow-sm"
+                        : "text-[#64748b] hover:text-[#f1f5f9]"
+                    }`}
+                  >
+                    IMSG Banking System
+                  </button>
+                </div>
+
+                <span className="font-mono text-[10px] font-bold text-[#10b981] bg-[#10b981]/10 border border-[#10b981]/30 px-2.5 py-1 rounded-full whitespace-nowrap">
+                  ✓ PRODUCTION READY
+                </span>
+              </div>
+
+              {/* Title & Description */}
+              <div className="mb-5 space-y-1">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-serif text-xl sm:text-2xl text-[#f1f5f9] font-normal">
+                    {currentArch.title}
+                  </h3>
+                </div>
+                <p className="text-xs text-[#94a3b8] leading-relaxed">
+                  {currentArch.description}
+                </p>
+              </div>
+
+              {/* 4-Node Architecture Flow with Flowing Pulse */}
+              <div className="bg-[#06080f]/90 border border-white/10 rounded-xl p-4 sm:p-5 mb-5 space-y-4">
+                <div className="text-[10px] font-mono uppercase tracking-widest text-[#64748b] flex items-center justify-between">
+                  <span>Architecture Pipeline</span>
+                  <span className="text-[#00e5ff]">4 Nodes Connected</span>
+                </div>
+
+                {/* Nodes Flow */}
+                <div className="flex items-center justify-between gap-1">
+                  {currentArch.nodes.map((node, nIdx) => (
+                    <React.Fragment key={nIdx}>
+                      <div className="flex flex-col items-center gap-1.5 text-center flex-shrink-0">
+                        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white/[0.03] border border-white/15 hover:border-[#00e5ff]/50 flex items-center justify-center text-lg sm:text-xl transition-all shadow-sm">
+                          {node.icon}
+                        </div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#f1f5f9]">
+                          {node.label}
+                        </span>
+                        <span className="text-[9px] text-[#64748b] max-w-[62px] leading-tight">
+                          {node.sub}
+                        </span>
+                      </div>
+
+                      {nIdx < currentArch.nodes.length - 1 && (
+                        <div className="flex-1 h-[2px] bg-white/10 relative mx-1">
+                          <span
+                            className="absolute -top-[3px] w-2 h-2 rounded-full bg-[#00e5ff] shadow-[0_0_10px_#00e5ff] animate-flow-pulse"
+                            style={{ animationDelay: `${nIdx * 0.7}s` }}
+                          ></span>
+                        </div>
+                      )}
+                    </React.Fragment>
+                  ))}
                 </div>
               </div>
+
+              {/* Architecture Highlights Telemetry Matrix */}
+              <div className="grid grid-cols-2 gap-2 text-xs font-mono mb-5">
+                {currentArch.highlights.map((item, hIdx) => (
+                  <div key={hIdx} className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                    <span className="text-[9px] text-[#64748b] uppercase block">{item.label}</span>
+                    <strong className="text-[11px] text-[#f1f5f9] truncate block mt-0.5">{item.value}</strong>
+                  </div>
+                ))}
+              </div>
+
+              {/* Action Bar */}
+              <div className="flex items-center justify-between text-xs pt-3 border-t border-white/10 flex-wrap gap-2">
+                <span className={`font-mono text-[11px] font-semibold ${currentArch.statusColor}`}>
+                  {currentArch.status}
+                </span>
+
+                <button
+                  onClick={() => {
+                    const targetProj = projects.find((p) => p.id === currentArch.id) || projects[0];
+                    setSelectedProject(targetProj);
+                  }}
+                  className="font-mono text-xs text-[#00e5ff] hover:text-[#70f0ff] flex items-center gap-1 font-semibold"
+                >
+                  <span>Explore Technical Case Study</span> →
+                </button>
+              </div>
+            </div>
+
+            {/* Profile Avatar Glance */}
+            <div className="sr-card p-4 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-2xl overflow-hidden border-2 border-[#00e5ff]/30 flex-shrink-0 bg-[#06080f] shadow-lg">
+                  <img
+                    src="/Sani_Profile_2.png"
+                    alt="Sani Rathod"
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: "50% 30%" }}
+                    onError={(e) => { e.target.src = "/Sani_Profile.jpeg"; }}
+                  />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-[#f1f5f9]">Sani Rathod</h4>
+                  <p className="text-xs text-[#94a3b8]">Software Developer @ Varnilix Pvt Ltd</p>
+                </div>
+              </div>
+
+              <a
+                href="#about"
+                className="text-xs font-mono text-[#00e5ff] hover:text-[#70f0ff] flex items-center gap-1"
+              >
+                <span>Full Story</span> →
+              </a>
             </div>
           </div>
 
         </div>
 
-        {/* Quick Stats Bar */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-10 border-t border-slate-200 dark:border-slate-800">
-          <div className="p-4 rounded-2xl bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/60 text-center">
-            <div className="text-xl sm:text-2xl font-extrabold text-emerald-600 dark:text-emerald-400">Varnilix Pvt Ltd</div>
-            <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Hinjewadi Phase 1, Pune</div>
+        {/* Bottom Dev Metrics HUD */}
+        <div className="sr-card p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="font-mono text-xs font-medium text-[#10b981] flex items-center gap-1.5 whitespace-nowrap">
+            <span>$ sani.dev --stats</span>
+            <span className="w-2 h-4 bg-[#10b981] animate-cursor"></span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/60 text-center">
-            <div className="text-xl sm:text-2xl font-extrabold text-blue-600 dark:text-blue-400">UWMS Engine</div>
-            <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Multi-Client Payroll</div>
-          </div>
+          <div className="flex flex-wrap items-center gap-6 sm:gap-8 justify-start md:justify-end w-full md:w-auto">
+            <div className="flex flex-col">
+              <strong className="font-mono text-base sm:text-lg font-bold text-[#00e5ff] leading-none">1.5+</strong>
+              <span className="text-[10px] text-[#64748b] uppercase tracking-wider mt-1">Years Experience</span>
+            </div>
 
-          <div className="p-4 rounded-2xl bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/60 text-center">
-            <div className="text-2xl sm:text-3xl font-extrabold text-purple-600 dark:text-purple-400">B.E (7.64)</div>
-            <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Computer Engineering</div>
-          </div>
+            <div className="w-[1px] h-7 bg-white/10 hidden sm:block"></div>
 
-          <div className="p-4 rounded-2xl bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-slate-200/60 dark:border-slate-800/60 text-center">
-            <div className="text-2xl sm:text-3xl font-extrabold text-teal-600 dark:text-teal-400">Next.js & Java</div>
-            <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Core Stack</div>
+            <div className="flex flex-col">
+              <strong className="font-mono text-base sm:text-lg font-bold text-[#00e5ff] leading-none">4+</strong>
+              <span className="text-[10px] text-[#64748b] uppercase tracking-wider mt-1">Enterprise Deliverables</span>
+            </div>
+
+            <div className="w-[1px] h-7 bg-white/10 hidden sm:block"></div>
+
+            <div className="flex flex-col">
+              <strong className="font-mono text-base sm:text-lg font-bold text-[#10b981] leading-none">0</strong>
+              <span className="text-[10px] text-[#64748b] uppercase tracking-wider mt-1">Calculation Errors</span>
+            </div>
+
+            <div className="w-[1px] h-7 bg-white/10 hidden sm:block"></div>
+
+            <div className="flex flex-col">
+              <strong className="font-mono text-base sm:text-lg font-bold text-[#a855f7] leading-none">7.64</strong>
+              <span className="text-[10px] text-[#64748b] uppercase tracking-wider mt-1">B.E Comp CGPA</span>
+            </div>
+
+            <div className="w-[1px] h-7 bg-white/10 hidden sm:block"></div>
+
+            <div className="flex flex-col">
+              <strong className="font-mono text-base sm:text-lg font-bold text-[#f59e0b] leading-none">100%</strong>
+              <span className="text-[10px] text-[#64748b] uppercase tracking-wider mt-1">Delivery Success</span>
+            </div>
           </div>
         </div>
 
       </div>
+
+      {/* Scroll Down */}
+      <a
+        href="#about"
+        className="flex flex-col items-center gap-1.5 pt-6 text-[#64748b] hover:text-[#00e5ff] transition-colors self-center"
+      >
+        <span className="font-mono text-[10px] tracking-widest uppercase">Scroll to explore</span>
+        <ChevronDown className="w-4 h-4 animate-bounce text-[#00e5ff]" />
+      </a>
     </section>
   );
 }
