@@ -8,6 +8,7 @@ import confetti from "canvas-confetti";
 export default function Contact() {
   const { toggleResume, addContactMessage } = useTheme();
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [honeypot, setHoneypot] = useState("");
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,6 +30,20 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // 🛡️ Anti-Bot Honeypot Security Check: Silently discard if bot filled hidden trap field
+    if (honeypot && honeypot.trim() !== "") {
+      console.warn("Spam bot trapped by honeypot security filter.");
+      setIsSubmitting(true);
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setIsSent(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setHoneypot("");
+      }, 500);
+      return;
+    }
+
     if (!formData.name || !formData.email || !formData.message) return;
 
     setIsSubmitting(true);
@@ -41,13 +56,15 @@ export default function Contact() {
       created_at: new Date().toISOString(),
     };
 
-    // Send via FormSubmit directly to sanirathod8975@gmail.com
+    // Send via FormSubmit directly to sanirathod8975@gmail.com with honeypot security flag
     try {
       fetch("https://formsubmit.co/ajax/sanirathod8975@gmail.com", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           _subject: `[Portfolio Contact] New Message from ${formData.name}`,
+          _honey: honeypot,
+          _captcha: "false",
           ...msgPayload,
         }),
       }).catch(() => {});
@@ -61,6 +78,7 @@ export default function Contact() {
       setIsSent(true);
       confetti({ particleCount: 90, spread: 70, origin: { y: 0.6 } });
       setFormData({ name: "", email: "", subject: "", message: "" });
+      setHoneypot("");
     }, 600);
   };
 
@@ -223,7 +241,33 @@ export default function Contact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-3.5">
+              <form onSubmit={handleSubmit} className="space-y-3.5 relative">
+                {/* 🛡️ Anti-Bot Honeypot Security Trap (Invisible to humans, catches automated spam bots) */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    opacity: 0,
+                    position: "absolute",
+                    top: "-9999px",
+                    left: "-9999px",
+                    height: 0,
+                    width: 0,
+                    zIndex: -1,
+                    pointerEvents: "none",
+                  }}
+                >
+                  <label htmlFor="website_url_hp">Leave this field blank:</label>
+                  <input
+                    type="text"
+                    id="website_url_hp"
+                    name="website_url_hp"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-[11px] font-mono text-slate-600 dark:text-[#64748b] uppercase tracking-wider mb-1 font-semibold">

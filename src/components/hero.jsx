@@ -187,20 +187,20 @@ export default function Hero() {
               className="relative w-72 h-72 sm:w-[380px] sm:h-[380px]"
             >
               {/* Outer Glowing Circle Aura */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#0284c7] via-[#10b981] to-[#6366f1] blur-2xl opacity-60 dark:opacity-75 animate-pulse"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#0284c7] via-[#10b981] to-[#6366f1] blur-2xl opacity-35 dark:opacity-70 animate-pulse"></div>
               
               {/* Circular Container */}
-              <div className="relative w-full h-full rounded-full p-2 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.1] shadow-2xl">
-                <div className="w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-slate-800 relative bg-slate-950 flex items-center justify-center shadow-inner">
+              <div className="relative w-full h-full rounded-full p-2.5 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.1] shadow-2xl">
+                <div className="w-full h-full rounded-full overflow-hidden border-4 border-slate-100 dark:border-slate-800 relative bg-white dark:bg-[#0f172a] flex items-center justify-center shadow-sm">
                   <img
                     src="/Sani_Profile_2.png"
                     alt="Sani Rathod"
                     className="w-full h-full object-cover transition-all duration-300 hover:scale-105"
                     style={{
-                      objectPosition: "50% 35%",
+                      objectPosition: "50% 25%",
                     }}
                     onError={(e) => {
-                      e.target.src = "/Sani_Profile.jpeg";
+                      e.target.src = "/Sani_Profile.jpg";
                     }}
                   />
                 </div>
