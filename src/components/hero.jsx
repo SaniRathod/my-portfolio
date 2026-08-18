@@ -41,7 +41,7 @@ export default function Hero() {
   }, [displayText, isDeleting, roleIndex]);
 
   return (
-    <section id="hero" className="relative pt-[calc(72px+40px)] pb-20 border-b border-slate-200/80 dark:border-white/[0.06] overflow-hidden">
+    <section id="hero" className="relative pt-[calc(72px+24px)] sm:pt-[calc(72px+40px)] pb-16 sm:pb-20 border-b border-slate-200/80 dark:border-white/[0.06] overflow-hidden">
       {/* Ambient Radial Background */}
       <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-b from-[#0284c7]/15 via-[#2563eb]/5 to-transparent blur-3xl opacity-70 dark:opacity-40"></div>
@@ -49,18 +49,18 @@ export default function Hero() {
         <div className="absolute top-44 left-8 w-80 h-80 bg-[#6366f1]/10 blur-3xl rounded-full"></div>
       </div>
 
-      <div className="w-[min(1200px,calc(100%-40px))] mx-auto">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="w-full max-w-[1200px] px-4 sm:px-6 mx-auto">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           
           {/* Left Column: Headline, Typewriter, Bio, CTAs */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6 text-center lg:text-left">
             
             {/* Top Status Pill */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0284c7]/10 dark:bg-[#0284c7]/15 border border-[#0284c7]/20 dark:border-[#38bdf8]/30 text-xs font-bold text-[#0284c7] dark:text-[#38bdf8] backdrop-blur-md shadow-sm"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0284c7]/10 dark:bg-[#0284c7]/15 border border-[#0284c7]/20 dark:border-[#38bdf8]/30 text-xs font-bold text-[#0284c7] dark:text-[#38bdf8] backdrop-blur-md shadow-sm"
             >
               <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
               <span>Software Developer · Pune, India</span>
@@ -72,7 +72,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <h1 className="font-sans text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.12]">
+              <h1 className="font-sans text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.15]">
                 Hi, I'm{" "}
                 <span className="brand-name-gradient">
                   {siteSettings.name || "Sani Rathod"}
@@ -80,7 +80,7 @@ export default function Hero() {
               </h1>
 
               {/* Dynamic Animated Typing Role */}
-              <div className="h-12 mt-3 flex items-center justify-center lg:justify-start text-xl sm:text-2xl font-bold text-slate-700 dark:text-slate-200">
+              <div className="min-h-[40px] mt-2 sm:mt-3 flex items-center justify-center lg:justify-start text-base sm:text-2xl font-bold text-slate-700 dark:text-slate-200">
                 <span>I Am Into&nbsp;</span>
                 <span className="text-[#0284c7] dark:text-[#38bdf8] border-r-2 border-[#0284c7] dark:border-[#38bdf8] pr-1">
                   {displayText}
@@ -93,7 +93,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-slate-600 dark:text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal"
+              className="text-slate-600 dark:text-slate-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal"
             >
               Software Developer at <strong className="text-slate-900 dark:text-white font-bold">Varnilix Pvt Ltd</strong> (Hinjewadi Phase 1, Pune). Specializing in <strong className="text-[#0284c7] dark:text-[#38bdf8] font-bold">Next.js 16, TypeScript, PostgreSQL DB, Supabase</strong>, and <strong className="text-[#2563eb] dark:text-[#818cf8] font-bold">Java Spring Boot</strong> microservices.
             </motion.p>
@@ -103,10 +103,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25 }}
-              className="p-3 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] rounded-2xl inline-flex items-center space-x-3 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-sm"
+              className="p-3 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] rounded-2xl inline-flex items-center space-x-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-sm max-w-full text-left"
             >
-              <Building2 className="w-4 h-4 text-[#059669] dark:text-[#34d399]" />
-              <span>Current Project: <strong className="text-slate-900 dark:text-white">UWMS (Unified Wage Management System)</strong></span>
+              <Building2 className="w-4 h-4 text-[#059669] dark:text-[#34d399] flex-shrink-0" />
+              <span className="truncate">Current: <strong className="text-slate-900 dark:text-white">UWMS (Unified Wage Platform)</strong></span>
             </motion.div>
 
             {/* CTA Buttons Row */}
@@ -114,11 +114,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1"
             >
               <a
                 href="#work"
-                className="sr-btn-primary !text-sm !py-3.5 !px-6 !rounded-xl"
+                className="sr-btn-primary !text-xs sm:!text-sm !py-3 sm:!py-3.5 !px-5 sm:!px-6 !rounded-xl"
               >
                 <span>View UWMS &amp; Projects</span>
                 <ArrowRight className="w-4 h-4" />
@@ -126,7 +126,7 @@ export default function Hero() {
 
               <button
                 onClick={toggleResume}
-                className="sr-btn-ghost !text-sm !py-3.5 !px-6 !rounded-xl font-bold flex items-center gap-2"
+                className="sr-btn-ghost !text-xs sm:!text-sm !py-3 sm:!py-3.5 !px-5 sm:!px-6 !rounded-xl font-bold flex items-center gap-2"
               >
                 <Download className="w-4 h-4 text-[#0284c7] dark:text-[#38bdf8]" />
                 <span>View &amp; Download Resume</span>
@@ -135,9 +135,9 @@ export default function Hero() {
               <button
                 onClick={toggleTerminal}
                 title="Launch Developer CLI Shell"
-                className="p-3.5 rounded-xl bg-slate-100 dark:bg-[#0f172a] text-slate-700 dark:text-[#34d399] border border-slate-200 dark:border-white/[0.08] hover:border-[#059669]/40 dark:hover:border-[#34d399]/40 transition-all hover:scale-105 shadow-sm"
+                className="p-3 sm:p-3.5 rounded-xl bg-slate-100 dark:bg-[#0f172a] text-slate-700 dark:text-[#34d399] border border-slate-200 dark:border-white/[0.08] hover:border-[#059669]/40 dark:hover:border-[#34d399]/40 transition-all hover:scale-105 shadow-sm"
               >
-                <Terminal className="w-5 h-5" />
+                <Terminal className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </motion.div>
 
