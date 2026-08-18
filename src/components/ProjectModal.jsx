@@ -10,45 +10,45 @@ export default function ProjectModal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-fade-in overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) setSelectedProject(null);
       }}
     >
-      <div className="w-full max-w-3xl bg-[#0e1018] border border-white/10 rounded-2xl shadow-2xl overflow-hidden my-8 flex flex-col text-[#f4f6fb]">
+      <div className="w-full max-w-3xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden my-8 flex flex-col text-slate-900 dark:text-[#f8fafc]">
         
         {/* Banner / Header */}
-        <div className="relative bg-gradient-to-r from-[#07080d] via-[#121622] to-[#1a2236] p-7 sm:p-8 border-b border-white/10">
+        <div className="relative bg-slate-50 dark:bg-gradient-to-r dark:from-[#080d1a] dark:via-[#0f172a] dark:to-[#1e293b] p-7 sm:p-8 border-b border-slate-200 dark:border-white/[0.08]">
           <button
             onClick={() => setSelectedProject(null)}
-            className="absolute top-5 right-5 p-2 rounded-xl bg-white/5 hover:bg-white/10 text-[#9ca8bc] hover:text-white transition-colors"
+            className="absolute top-5 right-5 p-2 rounded-xl bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 text-slate-600 dark:text-[#94a3b8] hover:text-slate-900 dark:hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
           
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#4da3ff]/10 border border-[#4da3ff]/25 rounded-full text-xs font-mono font-semibold text-[#7cc4ff] mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0284c7]/10 dark:bg-[#0284c7]/15 border border-[#0284c7]/20 dark:border-[#38bdf8]/25 rounded-full text-xs font-mono font-bold text-[#0284c7] dark:text-[#38bdf8] mb-3">
             <Building2 className="w-3.5 h-3.5" />
             <span>{selectedProject.organization}</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#f4f6fb] font-normal leading-tight">
+          <h2 className="font-sans text-2xl sm:text-3xl text-slate-900 dark:text-white font-extrabold leading-tight">
             {selectedProject.title}
           </h2>
 
-          <p className="text-[#9ca8bc] text-xs sm:text-sm mt-1.5 font-medium">
+          <p className="text-slate-600 dark:text-[#94a3b8] text-xs sm:text-sm mt-1.5 font-medium">
             {selectedProject.tagline || 'Enterprise Software Solution'}
           </p>
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 sm:p-8 space-y-6 text-[#9ca8bc] overflow-y-auto max-h-[70vh]">
+        <div className="p-6 sm:p-8 space-y-6 text-slate-700 dark:text-[#cbd5e1] overflow-y-auto max-h-[70vh]">
           
           {/* Key Overview */}
           <div>
-            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#4da3ff] mb-2 flex items-center gap-2">
+            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#0284c7] dark:text-[#38bdf8] mb-2 flex items-center gap-2">
               <Layers className="w-4 h-4" /> System Overview
             </h3>
-            <p className="leading-relaxed text-sm text-[#f4f6fb]">
+            <p className="leading-relaxed text-sm text-slate-800 dark:text-white">
               {selectedProject.fullDescription || selectedProject.description}
             </p>
           </div>
@@ -56,14 +56,14 @@ export default function ProjectModal() {
           {/* Highlights & Architecture */}
           {selectedProject.highlights && (
             <div>
-              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#34d399] mb-3 flex items-center gap-2">
+              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#059669] dark:text-[#34d399] mb-3 flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4" /> Key Engineering Accomplishments
               </h3>
               <ul className="space-y-2.5 text-xs sm:text-sm">
                 {selectedProject.highlights.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#34d399] mt-2 flex-shrink-0"></span>
-                    <span className="text-[#f4f6fb] leading-relaxed">{item}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#059669] dark:bg-[#34d399] mt-2 flex-shrink-0"></span>
+                    <span className="text-slate-700 dark:text-[#cbd5e1] leading-relaxed font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -72,14 +72,14 @@ export default function ProjectModal() {
 
           {/* Tech Stack Architecture */}
           <div>
-            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#a78bfa] mb-3 flex items-center gap-2">
+            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#4f46e5] dark:text-[#818cf8] mb-3 flex items-center gap-2">
               <Cpu className="w-4 h-4" /> Tech Architecture
             </h3>
             <div className="flex flex-wrap gap-2">
               {selectedProject.tech.map((t, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1.5 bg-white/[0.04] border border-white/10 text-[#7cc4ff] rounded-xl text-xs font-mono font-semibold"
+                  className="px-3 py-1.5 bg-slate-100 dark:bg-[#080d1a] border border-slate-200 dark:border-white/[0.08] text-[#0284c7] dark:text-[#38bdf8] rounded-lg text-xs font-mono font-bold"
                 >
                   {t}
                 </span>
@@ -88,8 +88,8 @@ export default function ProjectModal() {
           </div>
 
           {/* Actions Footer */}
-          <div className="pt-4 border-t border-white/10 flex items-center justify-between flex-wrap gap-3">
-            <span className="text-xs font-mono text-[#6b7789] flex items-center gap-1">
+          <div className="pt-4 border-t border-slate-200 dark:border-white/[0.08] flex items-center justify-between flex-wrap gap-3">
+            <span className="text-xs font-mono text-slate-500 dark:text-[#64748b] flex items-center gap-1 font-semibold">
               <Calendar className="w-3.5 h-3.5" /> {selectedProject.duration}
             </span>
 
@@ -99,7 +99,7 @@ export default function ProjectModal() {
                   href={selectedProject.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="nj-btn-ghost !text-xs !py-2 !px-3.5"
+                  className="sr-btn-ghost !text-xs !py-2 !px-3.5"
                 >
                   <GithubIcon className="w-4 h-4" />
                   <span>GitHub Repository</span>
@@ -108,7 +108,7 @@ export default function ProjectModal() {
 
               <button
                 onClick={() => setSelectedProject(null)}
-                className="nj-btn-primary !text-xs !py-2 !px-4"
+                className="sr-btn-primary !text-xs !py-2 !px-4"
               >
                 <span>Close Case Study</span>
               </button>

@@ -19,7 +19,7 @@ import AdminModal from "./components/AdminModal";
 function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-[#06080f] text-[#f1f5f9] selection:bg-[#00e5ff]/30 selection:text-white relative">
+      <div className="min-h-screen bg-slate-50 dark:bg-[#080d1a] text-slate-900 dark:text-[#f8fafc] selection:bg-[#0284c7]/20 dark:selection:bg-[#38bdf8]/25 selection:text-[#0284c7] dark:selection:text-white relative transition-colors duration-300">
         {/* Custom Cyber Terminal Boot Sequence */}
         <BootLoader />
 

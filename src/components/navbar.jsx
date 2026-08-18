@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, Terminal, FileText, ShieldCheck, ArrowUpRight, Sparkles } from "lucide-react";
+import { Menu, X, FileText, ArrowUpRight, Sparkles, Download, Sun, Moon } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
 const NAV_ITEMS = [
   { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#work", label: "Work" },
-  { href: "#skills", label: "Skills" },
-  { href: "#expertise", label: "Expertise" },
-  { href: "#education", label: "Education" },
+  { href: "#work", label: "Solutions" },
+  { href: "#experience", label: "Trajectory" },
+  { href: "#skills", label: "Capabilities" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -17,13 +15,13 @@ export default function Navbar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
 
-  const { toggleResume, toggleTerminal, toggleAdmin } = useTheme();
+  const { theme, toggleTheme, toggleResume } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      const sectionIds = ["hero", "about", "experience", "work", "skills", "expertise", "education", "contact"];
+      const sectionIds = ["hero", "about", "work", "experience", "skills", "contact"];
       const current = sectionIds.find((id) => {
         const el = document.getElementById(id);
         if (el) {
@@ -55,7 +53,7 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#06080f]/90 backdrop-blur-xl border-b border-white/10 shadow-2xl py-3"
+            ? "bg-white/90 dark:bg-[#080d1a]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/[0.08] shadow-[0_4px_25px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-3"
             : "bg-transparent py-4 sm:py-5"
         }`}
       >
@@ -65,25 +63,26 @@ export default function Navbar() {
           <a
             href="#hero"
             onClick={(e) => handleLinkClick(e, "#hero")}
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-2.5 group"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#00e5ff] via-[#6366f1] to-[#a855f7] p-[1.5px] shadow-[0_0_20px_rgba(0,229,255,0.25)] group-hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] transition-all">
-              <div className="w-full h-full bg-[#06080f] rounded-xl flex items-center justify-center font-black text-sm text-white">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#0284c7] via-[#2563eb] to-[#38bdf8] p-[1.5px] shadow-[0_0_15px_rgba(2,132,199,0.2)] group-hover:shadow-[0_0_20px_rgba(2,132,199,0.35)] transition-all">
+              <div className="w-full h-full bg-white dark:bg-[#080d1a] rounded-[10px] flex items-center justify-center font-bold text-sm text-[#0f172a] dark:text-white tracking-tight">
                 SR
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-sm tracking-tight text-[#f1f5f9] group-hover:text-[#00e5ff] transition-colors">
+              <span className="font-extrabold text-sm tracking-tight text-slate-900 dark:text-white group-hover:text-[#0284c7] dark:group-hover:text-[#38bdf8] transition-colors flex items-center gap-1.5">
                 Sani Rathod
+                <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
               </span>
-              <span className="font-mono text-[9px] uppercase tracking-widest text-[#64748b]">
-                Software Dev
+              <span className="font-mono text-[10px] uppercase tracking-wider text-slate-500 dark:text-[#64748b]">
+                Software Developer
               </span>
             </div>
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center space-x-1 bg-[#0c101c]/80 border border-white/10 px-3 py-1.5 rounded-full backdrop-blur-md shadow-lg">
+          <nav className="hidden md:flex items-center space-x-1 bg-slate-100/80 dark:bg-[#0f172a]/70 border border-slate-200/80 dark:border-white/[0.08] px-3 py-1.5 rounded-full backdrop-blur-md shadow-sm">
             {NAV_ITEMS.map((link) => {
               const isActive = activeSection === link.href.replace("#", "");
               return (
@@ -91,10 +90,10 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className={`text-xs font-semibold px-3.5 py-1.5 rounded-full transition-all ${
+                  className={`text-xs font-semibold px-4 py-1.5 rounded-full transition-all ${
                     isActive
-                      ? "text-white bg-gradient-to-r from-[#00e5ff]/20 to-[#6366f1]/20 border border-[#00e5ff]/30 shadow-sm"
-                      : "text-[#94a3b8] hover:text-white hover:bg-white/5"
+                      ? "text-[#0284c7] dark:text-white bg-white dark:bg-gradient-to-r dark:from-[#0284c7]/25 dark:to-[#2563eb]/25 border border-slate-200 dark:border-[#38bdf8]/30 shadow-sm"
+                      : "text-slate-600 dark:text-[#94a3b8] hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/5"
                   }`}
                 >
                   {link.label}
@@ -105,40 +104,31 @@ export default function Navbar() {
 
           {/* Right Action Buttons */}
           <div className="hidden sm:flex items-center space-x-2.5">
-            {/* Terminal Shell Button */}
+            {/* Theme Toggle Button (Light/Dark Switcher) */}
             <button
-              onClick={toggleTerminal}
-              title="Open Developer Terminal (Ctrl+K)"
-              className="p-2.5 rounded-xl bg-[#0c101c] border border-white/10 text-[#94a3b8] hover:text-[#00e5ff] hover:border-[#00e5ff]/30 transition-all hover:scale-105"
+              onClick={toggleTheme}
+              title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+              className="p-2 rounded-xl bg-slate-100 dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-[#94a3b8] hover:text-[#0284c7] dark:hover:text-[#38bdf8] hover:border-[#0284c7]/40 dark:hover:border-[#38bdf8]/40 transition-all hover:scale-105 shadow-sm"
             >
-              <Terminal className="w-4 h-4" />
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-[#f59e0b]" /> : <Moon className="w-4 h-4 text-slate-700" />}
             </button>
 
-            {/* Admin Dashboard */}
-            <button
-              onClick={toggleAdmin}
-              title="Open Admin Dashboard"
-              className="p-2.5 rounded-xl bg-[#0c101c] border border-white/10 text-[#94a3b8] hover:text-[#a855f7] hover:border-[#a855f7]/30 transition-all hover:scale-105"
-            >
-              <ShieldCheck className="w-4 h-4" />
-            </button>
-
-            {/* Download CV (triggers ResumeModal with email dispatch) */}
+            {/* Download CV */}
             <button
               onClick={toggleResume}
               className="sr-btn-ghost !text-xs !py-2 !px-3.5"
             >
-              <FileText className="w-3.5 h-3.5 text-[#00e5ff]" />
+              <Download className="w-3.5 h-3.5 text-[#0284c7] dark:text-[#38bdf8]" />
               <span>Download CV</span>
             </button>
 
-            {/* Hire Me CTA */}
+            {/* Let's Talk CTA */}
             <a
               href="#contact"
               onClick={(e) => handleLinkClick(e, "#contact")}
               className="sr-btn-primary !text-xs !py-2 !px-4"
             >
-              <span>Hire Me</span>
+              <span>Let's Talk</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -146,16 +136,24 @@ export default function Navbar() {
           {/* Mobile Right Bar */}
           <div className="flex sm:hidden items-center space-x-2">
             <button
+              onClick={toggleTheme}
+              title="Toggle Theme"
+              className="p-2 rounded-xl bg-slate-100 dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-[#94a3b8]"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-[#f59e0b]" /> : <Moon className="w-4 h-4 text-slate-700" />}
+            </button>
+
+            <button
               onClick={toggleResume}
               className="sr-btn-ghost !text-xs !py-1.5 !px-2.5"
             >
-              <FileText className="w-3.5 h-3.5 text-[#00e5ff]" />
+              <Download className="w-3.5 h-3.5 text-[#0284c7] dark:text-[#38bdf8]" />
               <span>CV</span>
             </button>
 
             <button
               onClick={() => setIsDrawerOpen(true)}
-              className="p-2 rounded-xl bg-[#0c101c] border border-white/10 text-[#f1f5f9]"
+              className="p-2 rounded-xl bg-slate-100 dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] text-slate-800 dark:text-white"
               aria-label="Open menu"
             >
               <Menu className="w-5 h-5" />
@@ -168,24 +166,19 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       {isDrawerOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md lg:hidden animate-fade-in"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md md:hidden animate-fade-in"
           onClick={() => setIsDrawerOpen(false)}
         >
           <div
-            className="fixed top-0 right-0 bottom-0 w-[min(320px,85vw)] bg-[#0c101c] border-l border-white/10 p-6 flex flex-col justify-between"
+            className="absolute top-0 right-0 bottom-0 w-[280px] bg-white dark:bg-[#0f172a] border-l border-slate-200 dark:border-white/[0.08] p-6 flex flex-col justify-between shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div>
-              <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#00e5ff] to-[#6366f1] flex items-center justify-center font-bold text-xs text-white">
-                    SR
-                  </div>
-                  <span className="font-bold text-sm text-[#f1f5f9]">Sani Rathod</span>
-                </div>
+              <div className="flex items-center justify-between pb-4 mb-6 border-b border-slate-200 dark:border-white/[0.08]">
+                <span className="font-bold text-sm text-slate-900 dark:text-white">Sani Rathod</span>
                 <button
                   onClick={() => setIsDrawerOpen(false)}
-                  className="p-2 text-[#94a3b8] hover:text-white"
+                  className="p-2 text-slate-500 dark:text-[#94a3b8] hover:text-slate-900 dark:hover:text-white"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -197,7 +190,7 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={(e) => handleLinkClick(e, link.href)}
-                    className="block px-3 py-2.5 rounded-xl text-sm font-semibold text-[#94a3b8] hover:text-white hover:bg-white/5 transition-colors"
+                    className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-[#cbd5e1] hover:bg-slate-100 dark:hover:bg-white/5 hover:text-[#0284c7] dark:hover:text-white"
                   >
                     {link.label}
                   </a>
@@ -205,35 +198,24 @@ export default function Navbar() {
               </div>
             </div>
 
-            <div className="space-y-2.5 pt-6 border-t border-white/10">
+            <div className="space-y-2 pt-4 border-t border-slate-200 dark:border-white/[0.08]">
               <button
                 onClick={() => {
                   setIsDrawerOpen(false);
                   toggleResume();
                 }}
-                className="sr-btn-ghost w-full justify-center !text-xs !py-2.5"
+                className="sr-btn-primary w-full justify-center !text-xs"
               >
-                <FileText className="w-4 h-4 text-[#00e5ff]" />
+                <Download className="w-3.5 h-3.5" />
                 <span>Download CV (PDF)</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setIsDrawerOpen(false);
-                  toggleAdmin();
-                }}
-                className="sr-btn-ghost w-full justify-center !text-xs !py-2.5 text-[#a855f7]"
-              >
-                <ShieldCheck className="w-4 h-4 text-[#a855f7]" />
-                <span>Admin Dashboard</span>
               </button>
 
               <a
                 href="#contact"
                 onClick={(e) => handleLinkClick(e, "#contact")}
-                className="sr-btn-primary w-full justify-center !text-xs !py-2.5"
+                className="sr-btn-ghost w-full justify-center !text-xs"
               >
-                <span>Hire Me</span>
+                <span>Get in Touch</span>
               </a>
             </div>
           </div>

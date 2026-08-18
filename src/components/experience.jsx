@@ -1,19 +1,20 @@
 import React from "react";
-import { Briefcase, Calendar, MapPin, CheckCircle2 } from "lucide-react";
+import { Briefcase, Calendar, MapPin, CheckCircle2, Building2, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 
 export default function Experience() {
   const { experiences } = useTheme();
 
   return (
-    <section id="experience" className="py-24 border-b border-white/[0.04] bg-[#0c101c]/40">
+    <section id="experience" className="py-24 border-b border-slate-200/80 dark:border-white/[0.06] bg-slate-50/50 dark:bg-[#080d1a]/50">
       <div className="w-[min(1200px,calc(100%-40px))] mx-auto">
         
         {/* Section Header */}
-        <p className="section-tag">02 — Career Journey</p>
-        <h2 className="section-heading">Engineering trajectory &amp; impact</h2>
-        <p className="text-[#94a3b8] text-sm sm:text-base max-w-xl mb-12 leading-relaxed">
-          From full-stack engineering internships to architecting multi-project wage engines and banking microservices.
+        <p className="section-tag">03 — Career Trajectory</p>
+        <h2 className="section-heading">Engineering trajectory &amp; real-world impact</h2>
+        <p className="text-slate-600 dark:text-[#94a3b8] text-base max-w-xl mb-12 leading-relaxed">
+          From full-stack engineering internships to architecting multi-project wage engines and secure banking microservices.
         </p>
 
         {/* Timeline Stack */}
@@ -21,57 +22,62 @@ export default function Experience() {
           {experiences.map((exp, idx) => {
             const isCurrent = exp.badge === "Current Role" || idx === 0;
             return (
-              <article
+              <motion.article
                 key={exp.id || idx}
-                className={`sr-card p-6 sm:p-8 relative overflow-hidden transition-all ${
-                  isCurrent ? "border-[#10b981]/30 shadow-[0_0_40px_rgba(16,185,129,0.08)]" : ""
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: idx * 0.1 }}
+                className={`sr-card p-6 sm:p-8 bg-white dark:bg-[#0f172a] relative overflow-hidden transition-all shadow-md ${
+                  isCurrent ? "border-[#0284c7]/40 dark:border-[#38bdf8]/35 shadow-lg" : "border-slate-200 dark:border-white/[0.08]"
                 }`}
               >
                 {/* Glowing Top Edge */}
                 <div
                   className={`absolute top-0 left-0 right-0 h-[2px] ${
                     isCurrent
-                      ? "bg-gradient-to-r from-[#10b981] via-[#00e5ff] to-[#6366f1]"
-                      : "bg-gradient-to-r from-[#00e5ff] to-[#a855f7] opacity-50"
+                      ? "bg-gradient-to-r from-[#0284c7] via-[#2563eb] to-[#38bdf8]"
+                      : "bg-gradient-to-r from-[#0284c7] to-[#8b5cf6] opacity-40"
                   }`}
                 ></div>
 
                 {/* Meta Row */}
                 <div className="flex flex-wrap items-center gap-3 mb-3">
-                  <span className="font-mono text-xs font-semibold text-[#00e5ff] bg-[#00e5ff]/10 border border-[#00e5ff]/25 px-2.5 py-1 rounded-md">
+                  <span className="font-mono text-xs font-bold text-[#0284c7] dark:text-[#38bdf8] bg-[#0284c7]/10 dark:bg-[#0284c7]/15 border border-[#0284c7]/20 dark:border-[#38bdf8]/25 px-2.5 py-1 rounded-md">
                     {exp.duration}
                   </span>
 
                   {isCurrent && (
-                    <span className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-wider uppercase text-[#10b981] bg-[#10b981]/10 border border-[#10b981]/30 px-3 py-0.5 rounded-full">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-wider uppercase text-[#059669] dark:text-[#34d399] bg-emerald-50 dark:bg-[#10b981]/15 border border-emerald-200 dark:border-[#10b981]/30 px-3 py-0.5 rounded-full">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
                       Current Position
                     </span>
                   )}
 
-                  <span className="text-xs text-[#64748b] font-medium flex items-center gap-1">
-                    <Building2 className="w-3.5 h-3.5" />
-                    <span>{exp.company} • {exp.location}</span>
+                  <span className="text-xs text-slate-600 dark:text-[#94a3b8] font-medium flex items-center gap-1.5">
+                    <Building2 className="w-3.5 h-3.5 text-slate-400 dark:text-[#64748b]" />
+                    <span className="text-slate-900 dark:text-white font-bold">{exp.company}</span>
+                    <span className="text-slate-400 dark:text-[#64748b]">• {exp.location}</span>
                   </span>
                 </div>
 
                 {/* Role Title */}
-                <h3 className="text-xl sm:text-2xl font-bold text-[#f1f5f9] tracking-tight mb-2">
+                <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-2">
                   {exp.title}
                 </h3>
 
                 {/* Summary */}
-                <p className="text-xs sm:text-sm text-[#94a3b8] leading-relaxed mb-4">
+                <p className="text-sm text-slate-600 dark:text-[#cbd5e1] leading-relaxed mb-4">
                   {exp.description}
                 </p>
 
                 {/* Key Accomplishments */}
                 {exp.achievements && (
-                  <ul className="space-y-2 mb-6 text-xs sm:text-sm text-[#94a3b8]">
+                  <ul className="space-y-2 mb-6 text-xs sm:text-sm text-slate-700 dark:text-[#cbd5e1]">
                     {exp.achievements.map((item, aIdx) => (
                       <li key={aIdx} className="flex items-start gap-2.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#00e5ff] mt-2 flex-shrink-0"></span>
-                        <span className="leading-relaxed text-[#f1f5f9]">{item}</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7] dark:bg-[#38bdf8] mt-2 flex-shrink-0"></span>
+                        <span className="leading-relaxed text-slate-800 dark:text-white font-medium">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -79,37 +85,23 @@ export default function Experience() {
 
                 {/* Tools Chips */}
                 {exp.skills && (
-                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100 dark:border-white/[0.08]">
                     {exp.skills.map((tool, tIdx) => (
                       <span
                         key={tIdx}
-                        className="font-mono text-[10px] font-medium text-[#94a3b8] px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/10"
+                        className="font-mono text-[10px] font-semibold text-slate-700 dark:text-[#cbd5e1] px-2.5 py-1 rounded-md bg-slate-50 dark:bg-[#080d1a] border border-slate-200 dark:border-white/[0.08]"
                       >
                         {tool}
                       </span>
                     ))}
                   </div>
                 )}
-              </article>
+              </motion.article>
             );
           })}
         </div>
 
       </div>
     </section>
-  );
-}
-
-function Building2(props) {
-  return (
-    <svg {...props} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/>
-      <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/>
-      <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/>
-      <path d="M10 6h4"/>
-      <path d="M10 10h4"/>
-      <path d="M10 14h4"/>
-      <path d="M10 18h4"/>
-    </svg>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Send, Copy, Check, FileText, ArrowUpRight, Sparkles } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "./SocialIcons";
+import { motion } from "framer-motion";
+import { LinkedinIcon } from "./SocialIcons";
 import { useTheme } from "../context/ThemeContext";
 import confetti from "canvas-confetti";
 
@@ -64,23 +65,29 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 border-b border-white/[0.04] relative">
+    <section id="contact" className="py-24 border-b border-slate-200/80 dark:border-white/[0.06] relative bg-slate-50/50 dark:bg-transparent">
       <div className="w-[min(1200px,calc(100%-40px))] mx-auto">
         
         {/* Section Header */}
-        <p className="section-tag">08 — Direct Connection</p>
+        <p className="section-tag">07 — Direct Connection</p>
         <h2 className="section-heading">Let's build something<br />extraordinary together</h2>
         
         <div className="grid lg:grid-cols-2 gap-12 items-start mt-8">
           
           {/* Left Column: Direct Contact Links */}
-          <div className="space-y-6">
-            <p className="text-[#94a3b8] text-base leading-relaxed max-w-lg">
-              Open to software engineering opportunities, full-stack architectures, Next.js / TypeScript engineering, and Java backend microservices.
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+            className="space-y-6"
+          >
+            <p className="text-slate-600 dark:text-[#cbd5e1] text-base leading-relaxed max-w-lg">
+              Open to high-impact software engineering roles, full-stack architectures, Next.js / TypeScript engineering, and Java backend microservices.
             </p>
 
-            <div className="inline-flex items-center gap-2 text-xs font-semibold text-[#10b981] bg-[#10b981]/10 border border-[#10b981]/25 px-3.5 py-1.5 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_#10b981] animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 text-xs font-bold text-[#059669] dark:text-[#34d399] bg-emerald-50 dark:bg-[#10b981]/15 border border-emerald-200 dark:border-[#10b981]/30 px-3.5 py-1.5 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
               <span>Available for high-impact roles &amp; projects</span>
             </div>
 
@@ -89,23 +96,23 @@ export default function Contact() {
               <a
                 href="mailto:sanirathod8975@gmail.com"
                 onClick={handleCopyEmail}
-                className="sr-card p-4 flex items-center justify-between group"
+                className="sr-card p-4 flex items-center justify-between group bg-white dark:bg-[#0f172a] border-slate-200 dark:border-white/[0.08] hover:border-[#0284c7]/40 dark:hover:border-[#38bdf8]/40 shadow-sm"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#00e5ff]/10 border border-[#00e5ff]/25 text-[#00e5ff] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-[#0284c7]/10 dark:bg-[#0284c7]/15 border border-[#0284c7]/20 dark:border-[#38bdf8]/25 text-[#0284c7] dark:text-[#38bdf8] flex items-center justify-center">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="block font-mono text-[10px] text-[#64748b] uppercase tracking-wider">
+                    <span className="block font-mono text-[10px] text-slate-500 dark:text-[#64748b] uppercase tracking-wider font-semibold">
                       {copiedEmail ? "Copied to clipboard ✓" : "Email — click to copy"}
                     </span>
-                    <span className="font-semibold text-[#f1f5f9] text-xs sm:text-sm">
+                    <span className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">
                       sanirathod8975@gmail.com
                     </span>
                   </div>
                 </div>
-                <span className="text-xs text-[#00e5ff] group-hover:translate-x-1 transition-transform">
-                  {copiedEmail ? <Check className="w-4 h-4 text-[#10b981]" /> : <Copy className="w-4 h-4 text-[#64748b]" />}
+                <span className="text-xs text-[#0284c7] dark:text-[#38bdf8] group-hover:translate-x-1 transition-transform">
+                  {copiedEmail ? <Check className="w-4 h-4 text-[#059669] dark:text-[#34d399]" /> : <Copy className="w-4 h-4 text-slate-400 dark:text-[#64748b]" />}
                 </span>
               </a>
 
@@ -113,23 +120,23 @@ export default function Contact() {
               <a
                 href="tel:+918975223625"
                 onClick={handleCopyPhone}
-                className="sr-card p-4 flex items-center justify-between group"
+                className="sr-card p-4 flex items-center justify-between group bg-white dark:bg-[#0f172a] border-slate-200 dark:border-white/[0.08] hover:border-[#059669]/40 dark:hover:border-[#34d399]/40 shadow-sm"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#10b981]/10 border border-[#10b981]/25 text-[#10b981] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-[#10b981]/15 border border-emerald-200 dark:border-[#10b981]/25 text-[#059669] dark:text-[#34d399] flex items-center justify-center">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="block font-mono text-[10px] text-[#64748b] uppercase tracking-wider">
+                    <span className="block font-mono text-[10px] text-slate-500 dark:text-[#64748b] uppercase tracking-wider font-semibold">
                       {copiedPhone ? "Copied to clipboard ✓" : "Phone — click to copy"}
                     </span>
-                    <span className="font-semibold text-[#f1f5f9] text-xs sm:text-sm">
+                    <span className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">
                       +91 8975223625
                     </span>
                   </div>
                 </div>
-                <span className="text-xs text-[#10b981] group-hover:translate-x-1 transition-transform">
-                  {copiedPhone ? <Check className="w-4 h-4 text-[#10b981]" /> : <Copy className="w-4 h-4 text-[#64748b]" />}
+                <span className="text-xs text-[#059669] dark:text-[#34d399] group-hover:translate-x-1 transition-transform">
+                  {copiedPhone ? <Check className="w-4 h-4 text-[#059669] dark:text-[#34d399]" /> : <Copy className="w-4 h-4 text-slate-400 dark:text-[#64748b]" />}
                 </span>
               </a>
 
@@ -138,53 +145,59 @@ export default function Contact() {
                 href="https://in.linkedin.com/in/sani-rathod"
                 target="_blank"
                 rel="noreferrer"
-                className="sr-card p-4 flex items-center justify-between group"
+                className="sr-card p-4 flex items-center justify-between group bg-white dark:bg-[#0f172a] border-slate-200 dark:border-white/[0.08] hover:border-[#4f46e5]/40 dark:hover:border-[#818cf8]/40 shadow-sm"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/25 text-[#6366f1] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-[#6366f1]/15 border border-indigo-200 dark:border-[#6366f1]/25 text-[#4f46e5] dark:text-[#818cf8] flex items-center justify-center">
                     <LinkedinIcon className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="block font-mono text-[10px] text-[#64748b] uppercase tracking-wider">
+                    <span className="block font-mono text-[10px] text-slate-500 dark:text-[#64748b] uppercase tracking-wider font-semibold">
                       LinkedIn
                     </span>
-                    <span className="font-semibold text-[#f1f5f9] text-xs sm:text-sm">
+                    <span className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">
                       linkedin.com/in/sani-rathod
                     </span>
                   </div>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-[#64748b] group-hover:text-[#6366f1] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-4 h-4 text-slate-400 dark:text-[#64748b] group-hover:text-[#4f46e5] dark:group-hover:text-[#818cf8] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
 
               {/* Location */}
-              <div className="sr-card p-4 flex items-center gap-3.5 cursor-default">
-                <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 text-[#64748b] flex items-center justify-center">
+              <div className="sr-card p-4 flex items-center gap-3.5 cursor-default bg-white dark:bg-[#0f172a] border-slate-200 dark:border-white/[0.08] shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-[#080d1a] border border-slate-200 dark:border-white/[0.08] text-slate-500 dark:text-[#64748b] flex items-center justify-center">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="block font-mono text-[10px] text-[#64748b] uppercase tracking-wider">Location</span>
-                  <span className="font-semibold text-[#f1f5f9] text-xs sm:text-sm">
+                  <span className="block font-mono text-[10px] text-slate-500 dark:text-[#64748b] uppercase tracking-wider font-semibold">Location</span>
+                  <span className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">
                     Hinjewadi Phase 1, Pune, Maharashtra, India
                   </span>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: CTA Box & Form */}
-          <div className="sr-card p-7 sm:p-9 bg-gradient-to-br from-[#00e5ff]/[0.08] via-[#0c101c] to-[#06080f] border-[#00e5ff]/30 space-y-6 shadow-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.1 }}
+            className="sr-card p-7 sm:p-9 bg-white dark:bg-gradient-to-br dark:from-[#0284c7]/[0.08] dark:via-[#0f172a] dark:to-[#080d1a] border-slate-200 dark:border-[#38bdf8]/30 space-y-6 shadow-xl"
+          >
             <div className="text-center sm:text-left space-y-1">
-              <h3 className="font-serif text-2xl sm:text-3xl text-[#f1f5f9]">Connect directly</h3>
-              <p className="text-xs sm:text-sm text-[#94a3b8]">
-                Download official résumé or submit an inquiry. I reply within 24 hours.
+              <h3 className="font-sans text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Connect directly</h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-[#94a3b8]">
+                Download official ATS résumé or submit an inquiry. I reply within 24 hours.
               </p>
             </div>
 
             {/* Direct Résumé Download CTA Banner */}
-            <div className="p-4 rounded-xl bg-[#06080f]/90 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#080d1a] border border-slate-200 dark:border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
               <div>
-                <strong className="block text-xs text-[#f1f5f9]">Official Résumé (ATS Standard)</strong>
-                <span className="text-[11px] text-[#64748b]">1-2 Pages • Optimized Format • PDF</span>
+                <strong className="block text-xs text-slate-900 dark:text-white font-bold">Official Résumé (ATS Standard)</strong>
+                <span className="text-[11px] text-slate-500 dark:text-[#64748b]">1-2 Pages • Optimized Format • PDF</span>
               </div>
               <button
                 onClick={toggleResume}
@@ -196,10 +209,10 @@ export default function Contact() {
             </div>
 
             {isSent ? (
-              <div className="p-6 rounded-xl bg-[#10b981]/10 border border-[#10b981]/30 text-center space-y-2">
-                <Sparkles className="w-6 h-6 text-[#10b981] mx-auto" />
-                <h4 className="font-bold text-[#f1f5f9] text-sm">Message Sent to Sani!</h4>
-                <p className="text-xs text-[#94a3b8]">
+              <div className="p-6 rounded-xl bg-emerald-50 dark:bg-[#10b981]/10 border border-emerald-200 dark:border-[#10b981]/30 text-center space-y-2">
+                <Sparkles className="w-6 h-6 text-[#059669] dark:text-[#34d399] mx-auto" />
+                <h4 className="font-extrabold text-slate-900 dark:text-white text-sm">Message Sent to Sani!</h4>
+                <p className="text-xs text-slate-600 dark:text-[#94a3b8]">
                   Thank you for reaching out. I'll get back to you promptly at your email.
                 </p>
                 <button
@@ -213,7 +226,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-3.5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-mono text-[#64748b] uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-mono text-slate-600 dark:text-[#64748b] uppercase tracking-wider mb-1 font-semibold">
                       Your Name *
                     </label>
                     <input
@@ -222,12 +235,12 @@ export default function Contact() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Alex Morgan"
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-black/40 border border-white/10 text-xs text-[#f1f5f9] font-mono focus:outline-none focus:border-[#00e5ff]"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-[#080d1a] border border-slate-200 dark:border-white/[0.08] text-xs text-slate-900 dark:text-white font-mono focus:outline-none focus:border-[#0284c7] dark:focus:border-[#38bdf8]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-mono text-[#64748b] uppercase tracking-wider mb-1">
+                    <label className="block text-[11px] font-mono text-slate-600 dark:text-[#64748b] uppercase tracking-wider mb-1 font-semibold">
                       Your Email *
                     </label>
                     <input
@@ -236,13 +249,13 @@ export default function Contact() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="alex@company.com"
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-black/40 border border-white/10 text-xs text-[#f1f5f9] font-mono focus:outline-none focus:border-[#00e5ff]"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-[#080d1a] border border-slate-200 dark:border-white/[0.08] text-xs text-slate-900 dark:text-white font-mono focus:outline-none focus:border-[#0284c7] dark:focus:border-[#38bdf8]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-mono text-[#64748b] uppercase tracking-wider mb-1">
+                  <label className="block text-[11px] font-mono text-slate-600 dark:text-[#64748b] uppercase tracking-wider mb-1 font-semibold">
                     Subject
                   </label>
                   <input
@@ -250,12 +263,12 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     placeholder="Engineering Role / Project Discussion"
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-black/40 border border-white/10 text-xs text-[#f1f5f9] font-mono focus:outline-none focus:border-[#00e5ff]"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-[#080d1a] border border-slate-200 dark:border-white/[0.08] text-xs text-slate-900 dark:text-white font-mono focus:outline-none focus:border-[#0284c7] dark:focus:border-[#38bdf8]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-mono text-[#64748b] uppercase tracking-wider mb-1">
+                  <label className="block text-[11px] font-mono text-slate-600 dark:text-[#64748b] uppercase tracking-wider mb-1 font-semibold">
                     Message *
                   </label>
                   <textarea
@@ -264,7 +277,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Hi Sani, I'd like to discuss an opportunity..."
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-black/40 border border-white/10 text-xs text-[#f1f5f9] font-mono focus:outline-none focus:border-[#00e5ff]"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-[#080d1a] border border-slate-200 dark:border-white/[0.08] text-xs text-slate-900 dark:text-white font-mono focus:outline-none focus:border-[#0284c7] dark:focus:border-[#38bdf8]"
                   ></textarea>
                 </div>
 
@@ -278,7 +291,7 @@ export default function Contact() {
                 </button>
               </form>
             )}
-          </div>
+          </motion.div>
 
         </div>
 

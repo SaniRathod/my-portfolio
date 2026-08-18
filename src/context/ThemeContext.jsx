@@ -187,8 +187,12 @@ const DEFAULT_EDUCATION = [
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('portfolio-theme') || 'dark';
+    return localStorage.getItem('portfolio-theme') || 'light';
   });
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
 
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
@@ -237,7 +241,11 @@ export const ThemeProvider = ({ children }) => {
   // Save to LocalStorage whenever state changes
   useEffect(() => {
     localStorage.setItem('portfolio-theme', theme);
-    document.documentElement.classList.toggle('dark', theme === 'dark');
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, [theme]);
 
   useEffect(() => {
@@ -285,7 +293,6 @@ export const ThemeProvider = ({ children }) => {
     }
   }, []);
 
-  const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   const toggleTerminal = () => setIsTerminalOpen((prev) => !prev);
   const toggleResume = () => setIsResumeOpen((prev) => !prev);
   const toggleAdmin = () => setIsAdminOpen((prev) => !prev);
