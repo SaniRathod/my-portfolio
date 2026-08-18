@@ -84,13 +84,14 @@ export default function ResumeModal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in overflow-y-auto"
+      style={{ zIndex: 10000 }}
+      className="fixed inset-0 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-md animate-fade-in overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) setIsResumeOpen(false);
       }}
     >
       {/* Modal Container */}
-      <div className="w-full max-w-4xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden my-6 flex flex-col max-h-[92vh] text-slate-900 dark:text-[#f8fafc]">
+      <div className="w-full max-w-4xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden my-4 sm:my-6 flex flex-col max-h-[92dvh] text-slate-900 dark:text-[#f8fafc]">
         
         {/* Top Control Bar (Hidden when printing) */}
         <div className="print:hidden bg-slate-50 dark:bg-[#080d1a] p-4 sm:p-5 border-b border-slate-200 dark:border-white/[0.08] flex items-center justify-between flex-wrap gap-3">

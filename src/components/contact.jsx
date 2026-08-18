@@ -65,8 +65,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 border-b border-slate-200/80 dark:border-white/[0.06] relative bg-slate-50/50 dark:bg-transparent">
-      <div className="w-[min(1200px,calc(100%-40px))] mx-auto">
+    <section id="contact" className="py-20 sm:py-24 border-b border-slate-200/80 dark:border-white/[0.06] relative bg-slate-50/50 dark:bg-transparent overflow-hidden">
+      <div className="w-full max-w-[1200px] px-4 sm:px-6 mx-auto">
         
         {/* Section Header */}
         <p className="section-tag">07 — Direct Connection</p>

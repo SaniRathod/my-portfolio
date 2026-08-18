@@ -208,8 +208,8 @@ Email: sanirathod8975@gmail.com | Phone: +91 8975223625`,
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-      <div className="w-full max-w-4xl bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden font-mono text-xs sm:text-sm flex flex-col h-[580px]">
+    <div style={{ zIndex: 10000 }} className="fixed inset-0 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fade-in">
+      <div className="w-full max-w-4xl bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden font-mono text-xs sm:text-sm flex flex-col h-[550px] max-h-[92dvh]">
         
         {/* Terminal Header */}
         <div className="bg-slate-900 px-4 py-3 border-b border-slate-800 flex items-center justify-between">

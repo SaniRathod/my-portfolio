@@ -90,21 +90,21 @@ export default function Skills() {
   });
 
   return (
-    <section id="skills" className="py-24 border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#080d1a]/40">
-      <div className="w-[min(1200px,calc(100%-40px))] mx-auto">
+    <section id="skills" className="py-20 sm:py-24 border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#080d1a]/40 overflow-hidden">
+      <div className="w-full max-w-[1200px] px-4 sm:px-6 mx-auto">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <p className="section-tag">04 — Core Capabilities</p>
             <h2 className="section-heading">Technical capabilities &amp; depth</h2>
-            <p className="text-slate-600 dark:text-[#94a3b8] text-base max-w-xl leading-relaxed">
+            <p className="text-slate-600 dark:text-[#94a3b8] text-sm sm:text-base max-w-xl leading-relaxed">
               Full-spectrum stack across modern frontend architectures, secure Java backends, relational schemas, and containerized cloud delivery.
             </p>
           </div>
 
           {/* Quick Filter Tabs */}
-          <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#0f172a] p-1.5 rounded-xl border border-slate-200 dark:border-white/[0.08] overflow-x-auto min-w-max shadow-sm">
+          <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#0f172a] p-1.5 rounded-xl border border-slate-200 dark:border-white/[0.08] overflow-x-auto max-w-full shadow-sm">
             <button
               onClick={() => setActiveTab("all")}
               className={`text-xs font-semibold px-3.5 py-1.5 rounded-lg transition-all ${

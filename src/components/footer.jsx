@@ -19,8 +19,8 @@ export default function Footer() {
   };
 
   return (
-    <footer className="py-10 border-t border-slate-200/80 dark:border-white/[0.06] text-xs text-slate-500 dark:text-[#64748b] bg-white dark:bg-[#060a12]">
-      <div className="w-[min(1200px,calc(100%-40px))] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="py-10 border-t border-slate-200/80 dark:border-white/[0.06] text-xs text-slate-500 dark:text-[#64748b] bg-white dark:bg-[#060a12] overflow-hidden">
+      <div className="w-full max-w-[1200px] px-4 sm:px-6 mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
         {/* Left: Copyright */}
         <div className="text-center md:text-left space-y-1">

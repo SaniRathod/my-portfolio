@@ -13,7 +13,6 @@ const NAV_ITEMS = [
 ];
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
 
@@ -22,8 +21,6 @@ export default function Navbar() {
   // Scroll detection & active section spy
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 15);
-
       const sectionIds = ["hero", "about", "work", "experience", "skills", "expertise", "education", "contact"];
       const current = sectionIds.find((id) => {
         const el = document.getElementById(id);
@@ -56,21 +53,21 @@ export default function Navbar() {
 
   const handleLinkClick = (e, href) => {
     e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
     setIsDrawerOpen(false);
+    document.body.style.overflow = "unset";
+    setTimeout(() => {
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 50);
   };
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          isScrolled
-            ? "bg-white/95 dark:bg-[#080d1a]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/[0.08] shadow-md py-2.5 sm:py-3"
-            : "bg-transparent py-3 sm:py-5"
-        }`}
+        style={{ zIndex: 1000 }}
+        className="fixed top-0 left-0 right-0 bg-white/95 dark:bg-[#080d1a]/95 backdrop-blur-xl border-b border-slate-200/90 dark:border-white/[0.1] shadow-sm py-2.5 sm:py-3.5 transition-all duration-300"
       >
         <div className="w-full max-w-[1200px] px-3 sm:px-6 mx-auto flex items-center justify-between">
           
@@ -80,17 +77,17 @@ export default function Navbar() {
             onClick={(e) => handleLinkClick(e, "#hero")}
             className="flex items-center gap-2 group select-none min-w-0 flex-shrink"
           >
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0284c7] via-[#2563eb] to-[#38bdf8] p-[1.5px] shadow-[0_0_15px_rgba(2,132,199,0.25)] flex-shrink-0">
-              <div className="w-full h-full bg-white dark:bg-[#080d1a] rounded-[10px] flex items-center justify-center font-bold text-xs text-slate-900 dark:text-white tracking-tight">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0284c7] via-[#2563eb] to-[#38bdf8] p-[1.5px] shadow-[0_0_15px_rgba(2,132,199,0.3)] flex-shrink-0">
+              <div className="w-full h-full bg-white dark:bg-[#080d1a] rounded-[10px] flex items-center justify-center font-black text-xs text-slate-900 dark:text-white tracking-tight">
                 SR
               </div>
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="font-extrabold text-xs sm:text-sm tracking-tight text-slate-900 dark:text-white group-hover:text-[#0284c7] dark:group-hover:text-[#38bdf8] transition-colors flex items-center gap-1 truncate">
+              <span className="font-black text-xs sm:text-sm tracking-tight text-slate-900 dark:text-white group-hover:text-[#0284c7] dark:group-hover:text-[#38bdf8] transition-colors flex items-center gap-1.5 truncate">
                 <span>Sani Rathod</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse flex-shrink-0"></span>
+                <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse flex-shrink-0"></span>
               </span>
-              <span className="font-mono text-[9px] uppercase tracking-wider text-slate-500 dark:text-[#64748b] truncate hidden min-[340px]:block">
+              <span className="font-mono text-[9px] uppercase tracking-wider text-slate-500 dark:text-[#94a3b8] truncate hidden min-[320px]:block">
                 Software Developer
               </span>
             </div>
@@ -107,7 +104,7 @@ export default function Navbar() {
                   onClick={(e) => handleLinkClick(e, link.href)}
                   className={`text-xs font-semibold px-4 py-1.5 rounded-full transition-all ${
                     isActive
-                      ? "text-[#0284c7] dark:text-white bg-white dark:bg-gradient-to-r dark:from-[#0284c7]/25 dark:to-[#2563eb]/25 border border-slate-200 dark:border-[#38bdf8]/30 shadow-sm"
+                      ? "text-[#0284c7] dark:text-white bg-white dark:bg-gradient-to-r dark:from-[#0284c7]/25 dark:to-[#2563eb]/25 border border-slate-200 dark:border-[#38bdf8]/30 shadow-sm font-bold"
                       : "text-slate-600 dark:text-[#94a3b8] hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/5"
                   }`}
                 >
@@ -149,12 +146,12 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Action Controls */}
-          <div className="flex sm:hidden items-center space-x-1.5 flex-shrink-0">
+          <div className="flex sm:hidden items-center space-x-2 flex-shrink-0">
             {/* Theme Switcher on Mobile Bar */}
             <button
               onClick={toggleTheme}
               title="Toggle Theme"
-              className="p-2 rounded-xl bg-slate-100 dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-[#94a3b8] shadow-sm active:scale-95"
+              className="p-2 rounded-xl bg-slate-100 dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.1] text-slate-700 dark:text-[#94a3b8] shadow-sm active:scale-95 flex items-center justify-center"
             >
               {theme === 'dark' ? <Sun className="w-4 h-4 text-[#f59e0b]" /> : <Moon className="w-4 h-4 text-slate-700" />}
             </button>
@@ -162,7 +159,7 @@ export default function Navbar() {
             {/* Compact CV Button on Mobile Bar */}
             <button
               onClick={toggleResume}
-              className="px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] text-[#0284c7] dark:text-[#38bdf8] font-bold text-xs flex items-center gap-1 shadow-sm active:scale-95"
+              className="px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.1] text-[#0284c7] dark:text-[#38bdf8] font-bold text-xs flex items-center gap-1 shadow-sm active:scale-95"
             >
               <Download className="w-3.5 h-3.5" />
               <span>CV</span>
@@ -171,7 +168,7 @@ export default function Navbar() {
             {/* Hamburger Drawer Toggle */}
             <button
               onClick={() => setIsDrawerOpen(true)}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] text-slate-800 dark:text-white shadow-sm hover:bg-slate-200 dark:hover:bg-white/10 active:scale-95 transition-all"
+              className="p-2 rounded-xl bg-slate-100 dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.1] text-slate-800 dark:text-white shadow-sm hover:bg-slate-200 dark:hover:bg-white/10 active:scale-95 transition-all flex items-center justify-center"
               aria-label="Open navigation menu"
             >
               <Menu className="w-5 h-5" />
@@ -184,14 +181,14 @@ export default function Navbar() {
       {/* Full-Screen Mobile Drawer Overlay */}
       <AnimatePresence>
         {isDrawerOpen && (
-          <div className="fixed inset-0 z-[9999] overflow-hidden md:hidden">
+          <div style={{ zIndex: 99998 }} className="fixed inset-0 overflow-hidden md:hidden">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="fixed inset-0 bg-black/70 backdrop-blur-sm"
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/75 backdrop-blur-sm"
               onClick={() => setIsDrawerOpen(false)}
             />
 
@@ -201,17 +198,18 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 280 }}
-              className="fixed top-0 right-0 bottom-0 w-[min(320px,85vw)] h-[100dvh] bg-white dark:bg-[#0f172a] border-l border-slate-200 dark:border-white/[0.1] p-5 flex flex-col justify-between shadow-2xl overflow-y-auto z-[10000]"
+              style={{ zIndex: 99999 }}
+              className="fixed top-0 right-0 bottom-0 w-[min(320px,85vw)] h-[100dvh] bg-white dark:bg-[#0f172a] border-l border-slate-200 dark:border-white/[0.1] p-5 flex flex-col justify-between shadow-2xl overflow-y-auto"
             >
               <div>
                 {/* Drawer Header */}
                 <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200 dark:border-white/[0.08]">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0284c7] via-[#2563eb] to-[#38bdf8] flex items-center justify-center font-bold text-xs text-white shadow-md">
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0284c7] via-[#2563eb] to-[#38bdf8] flex items-center justify-center font-black text-xs text-white shadow-md">
                       SR
                     </div>
                     <div>
-                      <h3 className="font-extrabold text-sm text-slate-900 dark:text-white">Sani Rathod</h3>
+                      <h3 className="font-black text-sm text-slate-900 dark:text-white">Sani Rathod</h3>
                       <p className="text-[10px] text-slate-500 dark:text-[#64748b] font-mono">Software Developer</p>
                     </div>
                   </div>

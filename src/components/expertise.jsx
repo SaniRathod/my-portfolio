@@ -43,14 +43,14 @@ const DOMAIN_DOMAINS = [
 
 export default function Expertise() {
   return (
-    <section id="expertise" className="py-24 border-b border-slate-200/80 dark:border-white/[0.06] bg-slate-50/50 dark:bg-[#080d1a]/50">
-      <div className="w-[min(1200px,calc(100%-40px))] mx-auto">
+    <section id="expertise" className="py-20 sm:py-24 border-b border-slate-200/80 dark:border-white/[0.06] bg-slate-50/50 dark:bg-[#080d1a]/50 overflow-hidden">
+      <div className="w-full max-w-[1200px] px-4 sm:px-6 mx-auto">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
           <p className="section-tag justify-center">05 — Specialized Domains</p>
           <h2 className="section-heading">Specialized domain engineering</h2>
-          <p className="text-slate-600 dark:text-[#94a3b8] text-base leading-relaxed">
+          <p className="text-slate-600 dark:text-[#94a3b8] text-sm sm:text-base leading-relaxed">
             High-precision calculation engines, financial compliance slabs, and scalable banking workflows built for enterprise operations.
           </p>
         </div>

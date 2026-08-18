@@ -10,12 +10,13 @@ export default function ProjectModal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-fade-in overflow-y-auto"
+      style={{ zIndex: 10000 }}
+      className="fixed inset-0 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-md animate-fade-in overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) setSelectedProject(null);
       }}
     >
-      <div className="w-full max-w-3xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden my-8 flex flex-col text-slate-900 dark:text-[#f8fafc]">
+      <div className="w-full max-w-3xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden my-4 sm:my-8 flex flex-col text-slate-900 dark:text-[#f8fafc] max-h-[92dvh]">
         
         {/* Banner / Header */}
         <div className="relative bg-slate-50 dark:bg-gradient-to-r dark:from-[#080d1a] dark:via-[#0f172a] dark:to-[#1e293b] p-7 sm:p-8 border-b border-slate-200 dark:border-white/[0.08]">

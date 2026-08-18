@@ -7,13 +7,13 @@ export default function Education() {
   const { educationList } = useTheme();
 
   return (
-    <section id="education" className="py-24 border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-transparent">
-      <div className="w-[min(1200px,calc(100%-40px))] mx-auto">
+    <section id="education" className="py-20 sm:py-24 border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-transparent overflow-hidden">
+      <div className="w-full max-w-[1200px] px-4 sm:px-6 mx-auto">
         
         {/* Section Header */}
         <p className="section-tag">06 — Academic Foundations</p>
         <h2 className="section-heading">Academic foundation &amp; credentials</h2>
-        <p className="text-slate-600 dark:text-[#94a3b8] text-base max-w-xl mb-12 leading-relaxed">
+        <p className="text-slate-600 dark:text-[#94a3b8] text-sm sm:text-base max-w-xl mb-10 sm:mb-12 leading-relaxed">
           Theoretical computer science foundations, algorithms, object-oriented design, databases, and applied software engineering.
         </p>
 

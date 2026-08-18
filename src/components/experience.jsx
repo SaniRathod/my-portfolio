@@ -7,13 +7,13 @@ export default function Experience() {
   const { experiences } = useTheme();
 
   return (
-    <section id="experience" className="py-24 border-b border-slate-200/80 dark:border-white/[0.06] bg-slate-50/50 dark:bg-[#080d1a]/50">
-      <div className="w-[min(1200px,calc(100%-40px))] mx-auto">
+    <section id="experience" className="py-20 sm:py-24 border-b border-slate-200/80 dark:border-white/[0.06] bg-slate-50/50 dark:bg-[#080d1a]/50 overflow-hidden">
+      <div className="w-full max-w-[1200px] px-4 sm:px-6 mx-auto">
         
         {/* Section Header */}
         <p className="section-tag">03 — Career Trajectory</p>
         <h2 className="section-heading">Engineering trajectory &amp; real-world impact</h2>
-        <p className="text-slate-600 dark:text-[#94a3b8] text-base max-w-xl mb-12 leading-relaxed">
+        <p className="text-slate-600 dark:text-[#94a3b8] text-sm sm:text-base max-w-xl mb-10 sm:mb-12 leading-relaxed">
           From full-stack engineering internships to architecting multi-project wage engines and secure banking microservices.
         </p>
 
